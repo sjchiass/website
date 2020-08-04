@@ -3,12 +3,12 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Sebastien Chiasson'
-SITENAME = 'sebaschi'
+SITENAME = 'Errata'
 SITEURL = ''
 
 PATH = 'content'
 
-TIMEZONE = 'Europe/Paris'
+TIMEZONE = 'Canada/Eastern'
 
 DEFAULT_LANG = 'en'
 
