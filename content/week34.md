@@ -4,7 +4,7 @@ Category: Updates
 Tags: plants, electronics
 Slug: week-34-2020
 Author: Sebastien Chiasson
-Summary: Plants attacked by cats; miscellaneous electronics
+Summary: Plants attacked by cats; OBS; miscellaneous electronics
 
 ## Plants
 
