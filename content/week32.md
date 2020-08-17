@@ -12,7 +12,7 @@ Summary: I continue work on modelling pi temperatures, and have considered start
 
 I've been logging CPU temperatures of my Raspberry Pi 3B+ for past several weeks. I add and remove parts of its case and run tests for hours. I've put the data in OLS models to see how different components affect temperatures. I've come to realize that this kind of modelling is "descriptive" but not too explanatory. This is because the data is generated from randomly stressing the CPU with 0/25/50/75/100% load. This data can answer the question "what gets hot" but now "how much heat is evacuated by an open top"?
 
-My problem has been that different case configurations have wildly different temperature ranges. A narrow range of temperature means less variety, and less variety means less for a model to work wit. Left alone, a fully closed case will slowly work its way to 80C and stay there. This kind of data isn't great because it only shows a cluster of temperatures: the CPU throttles itself and cannot go higher, and the closed case keeps the heat inside. The added problem is that the series is not stationary either. The temperature will fluctuate at first, but when it reaches its plateau it ceases to fluctuate: the range of temperature depends on how long the test has been running.
+My problem has been that different case configurations have wildly different temperature ranges. A narrow range of temperature means less variety, and less variety means less for a model to work with. Left alone, a fully closed case will slowly work its way to 80C and stay there. This kind of data isn't great because it only shows a cluster of temperatures: the CPU throttles itself and cannot go higher, and the closed case keeps the heat inside. The added problem is that the series is not stationary either. The temperature will fluctuate at first, but when it reaches its plateau it ceases to fluctuate: the range of temperature depends on how long the test has been running.
 
 ![Cases' time series]({static}images/updates/32/timeseries.png)
 
@@ -26,7 +26,7 @@ I'm going to keep playing with the modified script. I am only running it for ope
 
 The question is: how do I best adjust the script to capture good quality time series data? It's important that the CPU is allowed to build up heat, so cooldown cycles should not be started too soon (but too high and there is never cooldown). Latent case heat should be eliminated if possible, so the CPU should cool down to a fairly low temperature (50-55C) before working again.
 
-A bit of an annoying problem is that cases with fans never reach high temperatures and cool down very fast. How do I add variety to their temperatures? I could enforce cooldowns at regular intervals, regardless of temperature. However, I should have a look at the data before going this route.
+A bit of an annoying problem is that cases with fans neither reach high temperatures nor cool down very fast. How do I add more variety to their temperatures? I could enforce cooldowns at regular intervals, regardless of temperature. However, I should have a look at the data before going this route.
 
 ## Plants
 
@@ -64,7 +64,7 @@ Of course, I've also started writing these updates. (EDIT: this one has taken al
 
 ## Other things
 
-I've modified the lighting for my electronics bench. I've moved one of the spot lights way to the top of the structure. I found that it was in the way. Lights now come from all directions.
+I've modified the lighting for my electronics bench. I've moved one of the spotlights up to the top of the structure. I found that light was in the way. Light now comes from all directions.
 
 ![Well-lit lab]({static}images/updates/32/20200804_141716.jpg)
 

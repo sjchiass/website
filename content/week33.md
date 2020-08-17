@@ -52,9 +52,9 @@ My old way of collecting data had an issue with heat building up in the case and
 
 ![Cases' time series]({static}images/updates/33/timeseries.png)
 
-As you can see above, the case heats and stay hot for the duration of the test. The data isn't that great to figuring out how much heat the case dissipates. (I should come up with a measure of this bias, actually.)
+As you can see above, the case heats up and stays hot for the duration of the test. The data isn't that great to figuring out how much heat the case dissipates. (I should come up with a measure of this bias, actually.)
 
-The new script lets the case heat up to maximum then lets it cool down to a minimum. It waits 30 seconds before "declaring" the minimums and maximums. It does this for two hours. Here is the data. As you can see, much fairer to the closed cases.
+The new script lets the case heat up to a maximum and then lets it cool down to a minimum. It waits 30 seconds before "declaring" the minimums and maximums. It does this for two hours. Here is the data. As you can see, much fairer to the closed cases.
 
 ![Cases' time series improved]({static}images/updates/33/time_series_better.png)
 
