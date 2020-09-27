@@ -1,5 +1,9 @@
 # A website
 
+## Keep track of projects
+
+A GitHub "project": <https://github.com/sjchiass/website/projects/1>
+
 ## What it is
 
 This is a simple website made in the standard `pelican` way. I write content in `./content`, have `pelican` build it, and serve up the output at <https://www.sjchiass.com>.
