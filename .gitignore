@@ -1,3 +1,2 @@
-__pycache__/
-output/
-*.backup
+# Hugo default output directory
+/public
