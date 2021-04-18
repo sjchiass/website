@@ -15,8 +15,8 @@ enableRobotsTXT = true
   filename = "sitemap.xml"
 
 [params]
-  favicon = "images/bathcat.jpg"
-  site_logo = "images/bathcat.jpg"
+  favicon = "/images/bathcat.png"
+  site_logo = "/images/bathcat.png"
   description = "Various things."
   facebook = "https://www.facebook.com/sjchiass"
   twitter = "https://twitter.com/sjchiass"
@@ -29,7 +29,7 @@ enableRobotsTXT = true
   slack = ""
   stackoverflow = ""
   reddit = "https://www.reddit.com/user/sjchiass"
-  rss = "index.xml"
+  rss = "/index.xml"
   background_color_class = "bg-black"
   recent_posts_number = 5
   show_reading_time = true
