@@ -9,6 +9,8 @@ Paginate = 10
 googleAnalytics = ""
 enableRobotsTXT = true
 
+enableEmoji = true
+
 [sitemap]
   changefreq = "monthly"
   priority = 0.5
