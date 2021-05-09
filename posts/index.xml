@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.com/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 08:47:04 -0400</lastBuildDate><atom:link href="https://sjchiass.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo with GH actions</title><link>https://sjchiass.com/posts/misc/2021_w19_linux/</link><pubDate>Sun, 09 May 2021 08:47:04 -0400</pubDate><guid>https://sjchiass.com/posts/misc/2021_w19_linux/</guid><description>My newbie GH Action setup for updating my website</description><content type="html"><![CDATA[<h2 id="basic-idea">Basic idea</h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 08:47:04 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo with GH actions</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</link><pubDate>Sun, 09 May 2021 08:47:04 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</guid><description>My newbie GH Action setup for updating my website</description><content type="html"><![CDATA[<h2 id="basic-idea">Basic idea</h2>
 <p>I have GitHub actions build the Hugo website then I use scp to copy it over to my remote server.</p>
 <h2 id="ssh-keys">SSH keys</h2>
 <p>The idea here is to generate an SSH key on your computer. You then send the public key to the remote server, and you paste your private key into GitHub. That way GitHub can log into your server and dump the new files there.</p>
@@ -54,7 +54,9 @@ jobs:
 </code></pre><p>I also want to deploy to GitHub pages, so I add these steps at the end.</p>
 <p>The <code>sed</code> command edits my Hugo <code>config.toml</code> to point to the GH pages address. I can then deploy, and the site will work properly. If you don&rsquo;t do this, the site will be broken.</p>
 <pre><code>      - name: Config
-        run: sed -i &quot;s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=&quot; config.toml
+        run: |
+          sed -i &quot;s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=&quot; config.toml
+          hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -72,7 +74,7 @@ jobs:
 <p>On your server, run <code>sudo crontab -e</code> to start a regular job as <code>ROOT</code>. This will regularly copy your files to the web server.</p>
 <p>A file will open in your console, where you can paste</p>
 <pre><code>0 * * * * rsync -avh /home/username/gh_page/public/ /var/www/example.com/
-</code></pre>]]></content></item><item><title>BBQ baked beans in an Instant Pot</title><link>https://sjchiass.com/posts/food/2021_w16_food/</link><pubDate>Tue, 20 Apr 2021 07:21:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2021_w16_food/</guid><description>I used BBQ sauce to season beans and then cooked them for a few hours. With the BBQ sauce they take a longer time to cook. The results are very tasty.</description><content type="html"><![CDATA[<h2 id="background">Background</h2>
+</code></pre>]]></content></item><item><title>BBQ baked beans in an Instant Pot</title><link>https://sjchiass.github.io/website/posts/food/2021_w16_food/</link><pubDate>Tue, 20 Apr 2021 07:21:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2021_w16_food/</guid><description>I used BBQ sauce to season beans and then cooked them for a few hours. With the BBQ sauce they take a longer time to cook. The results are very tasty.</description><content type="html"><![CDATA[<h2 id="background">Background</h2>
 <p>I bought an Instant Pot months ago, and I&rsquo;ve been cooking a lot of beans in it. Most of the time I make chili-like beans and soups, but one day I decided to try BBQ sauce as the only seasoning.</p>
 <p>The internet warns about cooking beans in any kind of acid. They&rsquo;ll be hard they say. The acidic BBQ sauce I use does make the beans more stubborn to cook.</p>
 <p>This is my second time using this recipe. The beans are easy to make, well-cooked and tasty.</p>
@@ -123,7 +125,7 @@ jobs:
 <li>10 minutes stir and simmer on low</li>
 </ul>
 <p>I&rsquo;ll try it next time with this recipe. Other bean recipes work fine with a single pressure cook.</p>
-]]></content></item><item><title>Strange photos of playing cats</title><link>https://sjchiass.com/posts/cats/2021_w16_cats/</link><pubDate>Sun, 18 Apr 2021 15:49:26 -0400</pubDate><guid>https://sjchiass.com/posts/cats/2021_w16_cats/</guid><description>I went through old cat photos and found sound funny ones.</description><content type="html"><![CDATA[<p>(Looks like Hugo supports emojis: <a href="https://gohugo.io/functions/emojify/">https://gohugo.io/functions/emojify/</a> I use them below.)</p>
+]]></content></item><item><title>Strange photos of playing cats</title><link>https://sjchiass.github.io/website/posts/cats/2021_w16_cats/</link><pubDate>Sun, 18 Apr 2021 15:49:26 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2021_w16_cats/</guid><description>I went through old cat photos and found sound funny ones.</description><content type="html"><![CDATA[<p>(Looks like Hugo supports emojis: <a href="https://gohugo.io/functions/emojify/">https://gohugo.io/functions/emojify/</a> I use them below.)</p>
 <h3 id="eating-cat-grass">Eating cat grass</h3>
 <figure>
     <img src="IMG_0245.JPG"
@@ -191,14 +193,14 @@ jobs:
 </figure>
 
 <p>🐲 ❤️</p>
-]]></content></item><item><title>Eating habits of cats</title><link>https://sjchiass.com/posts/cats/2021_w15_cats/</link><pubDate>Sun, 11 Apr 2021 19:06:43 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2021_w15_cats/</guid><description>My cats have a system for sharing food with one another. One also developed a way of telling us it&amp;rsquo;s finished eating. Here&amp;rsquo;s a short video showing all of these things.</description><content type="html"><![CDATA[<p>Here is a video montage of our cats eating. They&rsquo;re very consistent with their habits. One always knocks on the door to be let out. Also they seem to agree how much food they leave each other.</p>
+]]></content></item><item><title>Eating habits of cats</title><link>https://sjchiass.github.io/website/posts/cats/2021_w15_cats/</link><pubDate>Sun, 11 Apr 2021 19:06:43 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2021_w15_cats/</guid><description>My cats have a system for sharing food with one another. One also developed a way of telling us it&amp;rsquo;s finished eating. Here&amp;rsquo;s a short video showing all of these things.</description><content type="html"><![CDATA[<p>Here is a video montage of our cats eating. They&rsquo;re very consistent with their habits. One always knocks on the door to be let out. Also they seem to agree how much food they leave each other.</p>
 <p>(We feed them separately to control their portion sizes. Since one cat doesn&rsquo;t chew kibble, we want to encourage it to eat more wet food.)</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/preyAnm5eaE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-]]></content></item><item><title>The magic of bread</title><link>https://sjchiass.com/posts/food/2021_w12_food/</link><pubDate>Mon, 22 Mar 2021 20:44:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2021_w12_food/</guid><description>I baked bread from frozen dough twice. I&amp;rsquo;ve recording both. The results are not perfect but still tasty.</description><content type="html"><![CDATA[<h2 id="background">Background</h2>
+]]></content></item><item><title>The magic of bread</title><link>https://sjchiass.github.io/website/posts/food/2021_w12_food/</link><pubDate>Mon, 22 Mar 2021 20:44:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2021_w12_food/</guid><description>I baked bread from frozen dough twice. I&amp;rsquo;ve recording both. The results are not perfect but still tasty.</description><content type="html"><![CDATA[<h2 id="background">Background</h2>
 <p>I bought a 5-pack of frozen bread dough.</p>
 <p>The instructions say to defrost the dough overnight in the fridge. I don&rsquo;t think I read the rest of the instructions. I added 30ml of salted butter in the pan and on top of the frozen dough.</p>
 <p>Let&rsquo;s bake!</p>
@@ -239,7 +241,7 @@ jobs:
 </ul>
 <h2 id="cleaning-the-oven-window">Cleaning the oven window</h2>
 <p>On the second run, I cleaned the oven window with baking soda and a bit of vinegar. I scrubbed vigorously with a sponge for about 10 minutes and it was all clean!</p>
-]]></content></item><item><title>Weevils in my beans</title><link>https://sjchiass.com/posts/misc/2021_w12_microscope/</link><pubDate>Mon, 22 Mar 2021 19:54:00 +0000</pubDate><guid>https://sjchiass.com/posts/misc/2021_w12_microscope/</guid><description>A few bags of pinto beans had bugs in them. I try to identify the bugs, mostly to make sure the beans are the source.</description><content type="html"><![CDATA[<h2 id="once-upon-a-time">Once upon a time</h2>
+]]></content></item><item><title>Weevils in my beans</title><link>https://sjchiass.github.io/website/posts/misc/2021_w12_microscope/</link><pubDate>Mon, 22 Mar 2021 19:54:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w12_microscope/</guid><description>A few bags of pinto beans had bugs in them. I try to identify the bugs, mostly to make sure the beans are the source.</description><content type="html"><![CDATA[<h2 id="once-upon-a-time">Once upon a time</h2>
 <p>Last fall I was feeling like I didn&rsquo;t want to go to the store too much, so I decided to buy a lot of long-lasting food all at once. All the dried beans I kept in a cooler.</p>
 <p>(At the time I didn&rsquo;t have an easy way to cook the beans, so the purchasing decision was weird.)</p>
 <p>I bought myself an Instant Pot and was really looking to make my own beans. When I got to rinsing the pinto beans, a swarm of bugs floated up in the water. (So <em>that&rsquo;s</em> why you wash and sort beans.)</p>
@@ -260,11 +262,11 @@ jobs:
 <p>A bit of Googling makes me think that these really are weevils. The page below has a better photo than Wikipedia.</p>
 <p><a href="https://bugguide.net/node/view/765912">https://bugguide.net/node/view/765912</a></p>
 <p>From now on I pay <strong>much</strong> more attention to my beans!</p>
-]]></content></item><item><title>Confectionery cat</title><link>https://sjchiass.com/posts/cats/2021_w12_cats/</link><pubDate>Mon, 22 Mar 2021 19:29:00 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2021_w12_cats/</guid><description>For the 2017 catlendar we dressed our cat in a confectionery costume floating in space. It&amp;rsquo;s cute.</description><content type="html"><![CDATA[<p>Here is our cat in a confectionery costume. This was for the 2017 catlendar.</p>
+]]></content></item><item><title>Confectionery cat</title><link>https://sjchiass.github.io/website/posts/cats/2021_w12_cats/</link><pubDate>Mon, 22 Mar 2021 19:29:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2021_w12_cats/</guid><description>For the 2017 catlendar we dressed our cat in a confectionery costume floating in space. It&amp;rsquo;s cute.</description><content type="html"><![CDATA[<p>Here is our cat in a confectionery costume. This was for the 2017 catlendar.</p>
 <p><img src="images/3Mars.jpg" alt="A confectionery cat staring forward"></p>
 <p>Here the cat is maybe trying to inch forward? It likes boxes.</p>
 <p><img src="images/3Mars2.jpg" alt="A confectionery cat staring elsewhere"></p>
-]]></content></item><item><title>2021 cat calendar</title><link>https://sjchiass.com/posts/cats/2021_w01_cats/</link><pubDate>Fri, 08 Jan 2021 13:14:00 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2021_w01_cats/</guid><description>With the lockdown we haven&amp;rsquo;t been able to distribute physical copies of our 2021 catlendar. Here&amp;rsquo;s an electronic version made with Python.</description><content type="html"><![CDATA[<h2 id="2021-cat-calendar">2021 Cat Calendar</h2>
+]]></content></item><item><title>2021 cat calendar</title><link>https://sjchiass.github.io/website/posts/cats/2021_w01_cats/</link><pubDate>Fri, 08 Jan 2021 13:14:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2021_w01_cats/</guid><description>With the lockdown we haven&amp;rsquo;t been able to distribute physical copies of our 2021 catlendar. Here&amp;rsquo;s an electronic version made with Python.</description><content type="html"><![CDATA[<h2 id="2021-cat-calendar">2021 Cat Calendar</h2>
 <p>Here is the 2021 cat calendar (or &ldquo;catlendar&rdquo;).</p>
 <p>I&rsquo;ve resized the images below. You can open them in a new tab to get more resolution. They&rsquo;re in US letter proportions, so you could print them to make a very basic calendar.</p>
 <p>For 2022 I&rsquo;m probably going to improve the <a href="https://github.com/sjchiass/catlendar">https://github.com/sjchiass/catlendar</a> code so that you can print your own physical calendars. In order to print good calendars, the photos and calendars have to be correctly arranged so that you can fold everything.</p>
@@ -280,7 +282,7 @@ jobs:
 <p><img src="images/10.png" alt="October 2021"></p>
 <p><img src="images/11.png" alt="November 2021"></p>
 <p><img src="images/12.png" alt="December 2021"></p>
-]]></content></item><item><title>Plants seem to attract gnats</title><link>https://sjchiass.com/posts/plants/2020_w48_plants/</link><pubDate>Sun, 22 Nov 2020 16:31:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w48_plants/</guid><description>What I thought were fruit flies turn out not be.</description><content type="html"><![CDATA[<h2 id="mystery-bugs">Mystery bugs</h2>
+]]></content></item><item><title>Plants seem to attract gnats</title><link>https://sjchiass.github.io/website/posts/plants/2020_w48_plants/</link><pubDate>Sun, 22 Nov 2020 16:31:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w48_plants/</guid><description>What I thought were fruit flies turn out not be.</description><content type="html"><![CDATA[<h2 id="mystery-bugs">Mystery bugs</h2>
 <p>For a few weeks we&rsquo;ve been seeing small flies in the apartment. At first I thought they were dormant fruits flies reinvigorated by the warmer weather, but I noticed that they didn&rsquo;t quite look like fruit flies. They didn&rsquo;t have the large red eyes. The new bugs were also a lot easier to kill. You could slap them out of the air without them noticing. Finally, we didn&rsquo;t have fresh fruits lying around.</p>
 <p>The only live plants around were the cat grass.</p>
 <p><img src="images/20201119_122726.jpg" alt="Cat grass"></p>
@@ -306,7 +308,7 @@ jobs:
 <h3 id="hypothesis">Hypothesis</h3>
 <p>During the summer, I turned my microscope towards the cat grass&rsquo;s roots. I was able to find some larva crawling on it. Could these have been the gnat larvae? I&rsquo;m not especially convinced. They don&rsquo;t seem visually similar to what I find from a &ldquo;gnat larva&rdquo; image search.</p>
 <p><img src="images/vlcsnap-2020-08-16-19h04m21s631.png" alt="An insect crawling on a root"></p>
-]]></content></item><item><title>Review of VSI Computer Science</title><link>https://sjchiass.com/posts/misc/2020_w45_books/</link><pubDate>Sun, 01 Nov 2020 17:25:00 +0000</pubDate><guid>https://sjchiass.com/posts/misc/2020_w45_books/</guid><description>What I learned from the book</description><content type="html"><![CDATA[<p><code>ISBN 978-0-19-873346-1</code></p>
+]]></content></item><item><title>Review of VSI Computer Science</title><link>https://sjchiass.github.io/website/posts/misc/2020_w45_books/</link><pubDate>Sun, 01 Nov 2020 17:25:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2020_w45_books/</guid><description>What I learned from the book</description><content type="html"><![CDATA[<p><code>ISBN 978-0-19-873346-1</code></p>
 <h3 id="general-impression">General impression</h3>
 <p>I think the book was alright. I thought that the author was very good at explaining most abstract concepts, but I found his explanations of more concrete things unsatisfying. I liked his explanations of algorithms and computer engineering, but I didn&rsquo;t enjoy his talk of &ldquo;liminal artefacts&rdquo; and &ldquo;symbol processing systems&rdquo;. I&rsquo;m still not sure what these are.</p>
 <p>It seems a bit like the book was better with things I already knew of, but new concepts were harder for me to understand. That said the good parts were enjoyable to read and maybe re-read.</p>
@@ -336,7 +338,7 @@ jobs:
 <p>Computer architecture refers both to the &ldquo;inner&rdquo; physical architecture of the circuitry and the &ldquo;outer&rdquo; architecture of the instruction set.</p>
 <h3 id="final-thoughts">Final thoughts</h3>
 <p>I wonder how much of this book I&rsquo;ll remember. I&rsquo;ll probably think of it when I hear about algorithms and heuristics. When I hear about computer science I might now recall &ldquo;computational thinking&rdquo;.</p>
-]]></content></item><item><title>Physical play/pause button for your phone</title><link>https://sjchiass.com/posts/electronics/2020_w44_electronics/</link><pubDate>Sun, 25 Oct 2020 14:57:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w44_electronics/</guid><description>Making a phone play/pause button: conveniently pause your podcasts when someone is talking to you.</description><content type="html"><![CDATA[<h3 id="basic-idea">Basic idea</h3>
+]]></content></item><item><title>Physical play/pause button for your phone</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w44_electronics/</link><pubDate>Sun, 25 Oct 2020 14:57:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w44_electronics/</guid><description>Making a phone play/pause button: conveniently pause your podcasts when someone is talking to you.</description><content type="html"><![CDATA[<h3 id="basic-idea">Basic idea</h3>
 <p>You can tell your phone to play/pause/hang-up by sending signals through the microphone. It&rsquo;s as simple as shorting the microphone to ground. It is also possible to have buttons to increase/decrease volume. This function is integrated into headsets and headphones+mic combos.</p>
 <p>Here&rsquo;s a demo of this. (I can&rsquo;t seem to record any audio, so all my videos are muted.)</p>
 
@@ -409,14 +411,14 @@ jobs:
 <p>The board works poorly. The play/pause button and the volume-down button work, but the volume-up button almost always fails.</p>
 <p>I suspect that there&rsquo;s something not right with the buttons. It could also be that the phone expects cleaner signals that I&rsquo;m generating.</p>
 <p>I wonder&hellip; how does this specification work alongside a real microphone? When someone uses the button on a phone call, is there any noise added to the audio?</p>
-]]></content></item><item><title>Graceful cat flop</title><link>https://sjchiass.com/posts/cats/2020_w40_cats/</link><pubDate>Sun, 27 Sep 2020 15:11:00 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2020_w40_cats/</guid><description>A photo gallery of a cat in laying on its back.</description><content type="html"><![CDATA[<h2 id="scandal">Scandal!</h2>
+]]></content></item><item><title>Graceful cat flop</title><link>https://sjchiass.github.io/website/posts/cats/2020_w40_cats/</link><pubDate>Sun, 27 Sep 2020 15:11:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2020_w40_cats/</guid><description>A photo gallery of a cat in laying on its back.</description><content type="html"><![CDATA[<h2 id="scandal">Scandal!</h2>
 <p>Here is my cat lying halfway on its back.</p>
 <p><img src="images/20200927_125519.jpg" alt="Cat on its back"></p>
 <p>Here is the same position from the front. The cat seems to be relaxing.</p>
 <p><img src="images/20200927_125530.jpg" alt="Cat on its back, face-to-face"></p>
 <p>Here is the cat from behind. It looks pretty comfortable.</p>
 <p><img src="images/20200927_125541.jpg" alt="The mysteries of feline rest"></p>
-]]></content></item><item><title>New cat grass supplies</title><link>https://sjchiass.com/posts/plants/2020_w40_plants/</link><pubDate>Sun, 27 Sep 2020 14:55:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w40_plants/</guid><description>Got grow lights, soilless media, and fed cats some grass</description><content type="html"><![CDATA[<h2 id="the-new-supplies">The new supplies</h2>
+]]></content></item><item><title>New cat grass supplies</title><link>https://sjchiass.github.io/website/posts/plants/2020_w40_plants/</link><pubDate>Sun, 27 Sep 2020 14:55:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w40_plants/</guid><description>Got grow lights, soilless media, and fed cats some grass</description><content type="html"><![CDATA[<h2 id="the-new-supplies">The new supplies</h2>
 <p>I got vermiculite and peat moss from the store. Vermiculite is a very light material that&rsquo;s made by heating a mineral and expanding it. It&rsquo;s used in hydroponics as a growing medium. Peat moss is a growing soil additive that helps retain water (I&rsquo;m thinking of mixing it with the vermiculite).</p>
 <p>The bag of vermiculite sounds like a bag of cat food, so the cats are very interested in it.</p>
 <p><img src="images/20200925_120907.jpg" alt="Cats investigating vermiculite"></p>
@@ -431,7 +433,7 @@ jobs:
 <p><img src="images/20200927_140936.jpg" alt="Cat pawing for the grass"></p>
 <p>They eat it like an inkjet printer slowly pulls in a sheet of paper. They very loudly chew the grass, and slowly the grass disappears down to their stomachs, step by step.</p>
 <p><img src="images/20200927_140949.jpg" alt="Cat chewing the grass"></p>
-]]></content></item><item><title>Quinoa-stuffed peppers</title><link>https://sjchiass.com/posts/food/2020_w40_food/</link><pubDate>Sun, 27 Sep 2020 14:45:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2020_w40_food/</guid><description>Easy stuffed peppers in an air fryer</description><content type="html"><![CDATA[<h2 id="pretty-easy-to-make-stuffed-peppers">Pretty easy to make stuffed peppers</h2>
+]]></content></item><item><title>Quinoa-stuffed peppers</title><link>https://sjchiass.github.io/website/posts/food/2020_w40_food/</link><pubDate>Sun, 27 Sep 2020 14:45:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2020_w40_food/</guid><description>Easy stuffed peppers in an air fryer</description><content type="html"><![CDATA[<h2 id="pretty-easy-to-make-stuffed-peppers">Pretty easy to make stuffed peppers</h2>
 <p>The air fryer was able to roast the outside of the peppers while getting the insides <em>very hot</em>.</p>
 <p>Even better: minimal cleanup!</p>
 <h3 id="ingredients">Ingredients</h3>
@@ -468,7 +470,7 @@ jobs:
 <p><img src="images/20200915_184237.jpg" alt="After 20 minutes at 350F"></p>
 <p>You can see how the skin of the pepper has roasted.</p>
 <p><img src="images/20200915_184458.jpg" alt="Nicely roasted peppers"></p>
-]]></content></item><item><title>Getting back into electronics</title><link>https://sjchiass.com/posts/electronics/2020_w38_electronics/</link><pubDate>Sun, 13 Sep 2020 20:00:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w38_electronics/</guid><description>Getting back into eletronics again after a hiatus, fun with Arduinos.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>Getting back into electronics</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w38_electronics/</link><pubDate>Sun, 13 Sep 2020 20:00:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w38_electronics/</guid><description>Getting back into eletronics again after a hiatus, fun with Arduinos.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <h4 id="the-updated-workspace">The updated workspace</h4>
 <p>Last week I set up a workspace to program an Arduino on a breadboard. I&rsquo;ve attached the monitor to an arm to give more space. Originally, the monitor was higher up, but I found that I didn&rsquo;t like having to crane my head upwards.</p>
 <p><img src="images/20200913_193838.jpg" alt="Setup"></p>
@@ -511,7 +513,7 @@ x1 = [(5.0 * int(x) / 1023.0) for x in x1.split(&quot;\r\n&quot;) if len(x) == 4
 <li>Create better test data, such as faster-acting circuit.</li>
 </ol>
 <p>I shouldn&rsquo;t forget to wrap up my <code>pitemp</code> project: <a href="https://github.com/sjchiass/pitemp">https://github.com/sjchiass/pitemp</a></p>
-]]></content></item><item><title>My continued eggplant obsession</title><link>https://sjchiass.com/posts/food/2020_w38_food/</link><pubDate>Sun, 13 Sep 2020 19:49:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2020_w38_food/</guid><description>Air frying eggplants vs. pan frying them</description><content type="html"><![CDATA[<p>This week we got two large eggplants. One went into the air fryer and the other into the frying pan.</p>
+]]></content></item><item><title>My continued eggplant obsession</title><link>https://sjchiass.github.io/website/posts/food/2020_w38_food/</link><pubDate>Sun, 13 Sep 2020 19:49:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2020_w38_food/</guid><description>Air frying eggplants vs. pan frying them</description><content type="html"><![CDATA[<p>This week we got two large eggplants. One went into the air fryer and the other into the frying pan.</p>
 <p>I think that egplants need humidity to soften and cook. I now wonder how to reliably make good air-fried eggplants. Should I soak the eggplant in marinade?</p>
 <h4 id="air-fried-eggplant">Air-fried eggplant</h4>
 <p>Last week the air fryer had made very dry eggplant chips (with chewy skin). This time I cut it into larger 1&quot; cubes.</p>
@@ -521,14 +523,14 @@ x1 = [(5.0 * int(x) / 1023.0) for x in x1.split(&quot;\r\n&quot;) if len(x) == 4
 <p>This was a recipe with soy sauce, sesame oil, honey, and cayenne pepper flakes. The sauce was only added at the end, after the eggplant had cooked on medium-high for 15 minutes.</p>
 <p>I think the extra humidity here is what helped the eggplant to cook better.</p>
 <p><img src="images/20200908_180151.jpg" alt="Softer fried eggplant"></p>
-]]></content></item><item><title>A bird tries to eat a sleeping cat</title><link>https://sjchiass.com/posts/cats/2020_w38_cats/</link><pubDate>Sun, 13 Sep 2020 19:43:00 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2020_w38_cats/</guid><description>A bird of prey tried to eat my cat but crashed against the window instead. I tried to identify it, but I&amp;rsquo;m not sure.</description><content type="html"><![CDATA[<h2 id="poor-babbys">Poor babbys</h2>
+]]></content></item><item><title>A bird tries to eat a sleeping cat</title><link>https://sjchiass.github.io/website/posts/cats/2020_w38_cats/</link><pubDate>Sun, 13 Sep 2020 19:43:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2020_w38_cats/</guid><description>A bird of prey tried to eat my cat but crashed against the window instead. I tried to identify it, but I&amp;rsquo;m not sure.</description><content type="html"><![CDATA[<h2 id="poor-babbys">Poor babbys</h2>
 <p>Here is my cat sleeping on the couch. It&rsquo;s the same place the other cat was sleeping last week.</p>
 <p><img src="images/20200908_123137.jpg" alt="Cat on the couch"></p>
 <h3 id="drama">Drama!</h3>
 <p>The other cat was sleeping in the cat tree when a bird tried to eat it! The large bird hit the window glass and then went on the edge of the balcony.</p>
 <p>It appears to have been a merlin. According to Wikipedia, merlins can be about a foot long, so this might have been a slightly bigger one. The tail matches the pictures.</p>
 <p><img src="images/20200913_125856.jpg" alt="Bird of prey on the balcony edge"></p>
-]]></content></item><item><title>Trying to make my grass flower</title><link>https://sjchiass.com/posts/plants/2020_w37_plants/</link><pubDate>Sun, 06 Sep 2020 16:40:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w37_plants/</guid><description>Worth a try</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>Trying to make my grass flower</title><link>https://sjchiass.github.io/website/posts/plants/2020_w37_plants/</link><pubDate>Sun, 06 Sep 2020 16:40:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w37_plants/</guid><description>Worth a try</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <p>I changed the light from a daylight spotlight to a warm-white bulb. I also reduced the light time from 18 hours to 12 hours.</p>
 <p>I&rsquo;m hoping that the change in light will make the plants flower. Plants often do this in response to shortening days. It&rsquo;s called &ldquo;bolting&rdquo;. You&rsquo;ve likely seen it happen if you&rsquo;ve grown lettuce: the plant stops growing tasty leaves and instead makes a long bitter stem (and perhaps yellow flowers).</p>
 <p>Some of the grass is getting a lot longer, so it may be working. One of my cats has started meowing at it (the plant is on top of a bookcase, out of reach).</p>
@@ -539,7 +541,7 @@ x1 = [(5.0 * int(x) / 1023.0) for x in x1.split(&quot;\r\n&quot;) if len(x) == 4
 <p>(After reading this article, I&rsquo;ve started doubting the &ldquo;top&rdquo; reviewers: <a href="https://arstechnica.com/gadgets/2020/09/amazons-top-uk-reviewers-appear-to-profit-from-fake-5-star-posts/">https://arstechnica.com/gadgets/2020/09/amazons-top-uk-reviewers-appear-to-profit-from-fake-5-star-posts/</a>)</p>
 <p>If I were to get the bulb, I would put two pots next to each other separated by a partition. One pot would get a normal daylight spotlight, the other would get a grow light. Which will grow faster?</p>
 <p>The store also sells perlite, vermiculite, and peat. If I can cobble together a hypdroponics system (probably nutrient film?), I could have some fun playing with that. I am not sure where to find tubing for my miniature pumps.</p>
-]]></content></item><item><title>Air frying eggplants and bologna</title><link>https://sjchiass.com/posts/food/2020_w37_food/</link><pubDate>Sun, 06 Sep 2020 16:26:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2020_w37_food/</guid><description>Air frying eggplants and bologna: not great</description><content type="html"><![CDATA[<h3 id="eggplant-chips">Eggplant chips</h3>
+]]></content></item><item><title>Air frying eggplants and bologna</title><link>https://sjchiass.github.io/website/posts/food/2020_w37_food/</link><pubDate>Sun, 06 Sep 2020 16:26:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2020_w37_food/</guid><description>Air frying eggplants and bologna: not great</description><content type="html"><![CDATA[<h3 id="eggplant-chips">Eggplant chips</h3>
 <p>These cooked well but weren&rsquo;t that great. The eggplant skin was chewy (but no doubt full of fiber). I think this would have been great with some of the skin peeled off.</p>
 <p>I started with three Asian eggplants. I cut them all up in 5mm thick disks.</p>
 <p><img src="images/20200831_172629.jpg" alt="Local eggplant"></p>
@@ -553,7 +555,7 @@ x1 = [(5.0 * int(x) / 1023.0) for x in x1.split(&quot;\r\n&quot;) if len(x) == 4
 <p>It took 30 minutes at 350F to fry it all. Unfortunately, it&rsquo;s not something that fries well in an air fryer. It&rsquo;s a catch-22. If you spread them out, you create a meat barrier that blocks the airflow. If you toss them around, the slices cover eat other and won&rsquo;t crisp.</p>
 <p>Final impression: tastes like hotdogs.</p>
 <p><img src="images/20200902_190953.jpg" alt="Bologna chips"></p>
-]]></content></item><item><title>Preparing an Arduino workspace</title><link>https://sjchiass.com/posts/electronics/2020_w37_electronics/</link><pubDate>Sun, 06 Sep 2020 16:12:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w37_electronics/</guid><description>Preparing an Arduino workspace. Nice to have everything together.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>Preparing an Arduino workspace</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w37_electronics/</link><pubDate>Sun, 06 Sep 2020 16:12:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w37_electronics/</guid><description>Preparing an Arduino workspace. Nice to have everything together.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <p>I am really interested in building some kind of Arduino oscilloscope. This requires a nice workplace for the Arduino but also a computer nearby for programming it. I was able to fit a 24&quot; monitor onto my little desk.</p>
 <p><img src="images/20200905_115309.jpg" alt="Setup"></p>
 <p>The desk is an <a href="https://www.ikea.com/ca/en/p/brusali-desk-brown-30302299/">Ikea Brusali</a>, so 90x52cm.</p>
@@ -563,9 +565,9 @@ x1 = [(5.0 * int(x) / 1023.0) for x in x1.split(&quot;\r\n&quot;) if len(x) == 4
 <p>An HDMI to VGA adapter will let me use a smaller VGA monitor with the Raspberry Pi, freeing up some space.</p>
 <p>I&rsquo;m also getting a bigger breadboard with binding post power connectors. The board can have two independant power supplies, which is important if I want the oscilloscope circuit to measure a separate circuit that oscillates. I need the Arduino&rsquo;s power supply to be clean.</p>
 <p>I&rsquo;m also getting variety packs of capacitors. I&rsquo;m hoping to be able to convert the square wave of a 555 timer into a sine wave. And of course I&rsquo;ll only know this has worked if I have a homemade oscilloscope to measure it.</p>
-]]></content></item><item><title>Cat relaxing in a funny pose</title><link>https://sjchiass.com/posts/cats/2020_w37_cats/</link><pubDate>Sun, 06 Sep 2020 16:09:00 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2020_w37_cats/</guid><description>A cat sleeping in a way that makes it look like it&amp;rsquo;s walking.</description><content type="html"><![CDATA[<h2 id="cat-relaxing-in-bipedal-mode">Cat relaxing in bipedal mode</h2>
+]]></content></item><item><title>Cat relaxing in a funny pose</title><link>https://sjchiass.github.io/website/posts/cats/2020_w37_cats/</link><pubDate>Sun, 06 Sep 2020 16:09:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2020_w37_cats/</guid><description>A cat sleeping in a way that makes it look like it&amp;rsquo;s walking.</description><content type="html"><![CDATA[<h2 id="cat-relaxing-in-bipedal-mode">Cat relaxing in bipedal mode</h2>
 <p><img src="images/20200831_165114.jpg" alt="Cat on the couch"></p>
-]]></content></item><item><title>A basic voltmeter with an LCD</title><link>https://sjchiass.com/posts/electronics/2020_w36_electronics/</link><pubDate>Sun, 30 Aug 2020 16:46:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w36_electronics/</guid><description>A basic voltmeter with an LCD. Simple but instructive.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>A basic voltmeter with an LCD</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w36_electronics/</link><pubDate>Sun, 30 Aug 2020 16:46:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w36_electronics/</guid><description>A basic voltmeter with an LCD. Simple but instructive.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <p>You can do fun things by reading the Arduino analog pins.</p>
 <p>I used this sample LCD code as a base: <a href="https://www.arduino.cc/en/Tutorial/HelloWorld">https://www.arduino.cc/en/Tutorial/HelloWorld</a>.</p>
 <p>The Arduino (the Atmega 328P) measures 0V-5V on its analog pins. It can return 1024 values (10-bit). By default the reference is the voltage supply (5V) but can be switched to whatever you have connected to the <code>AREF</code> pin.</p>
@@ -591,7 +593,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p><img src="images/5v_divider.png" alt="5V divider"></p>
 <p>It took me a bit of time to realize that this is how voltage dividers behave with two positive voltage sources.</p>
 <p>If I want to offset a voltage, I have to use the Arduino&rsquo;s <code>AREF</code>. I need to think more about how the reference value affects things. The range should always be 0V to <code>AREF</code>, right? How can it be made to be below 0V?</p>
-]]></content></item><item><title>Measuring soil humidity with an ohmmeter</title><link>https://sjchiass.com/posts/plants/2020_w36_plants/</link><pubDate>Sun, 30 Aug 2020 16:34:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w36_plants/</guid><description>A simple test</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>Measuring soil humidity with an ohmmeter</title><link>https://sjchiass.github.io/website/posts/plants/2020_w36_plants/</link><pubDate>Sun, 30 Aug 2020 16:34:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w36_plants/</guid><description>A simple test</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <p>The grass has been getting stronger! After removing the CD case, lowering the container 2-3 inches, the grass once again reaches the light!</p>
 <p><img src="images/20200830_150702.jpg" alt="Two weeks of growth"></p>
 <p>During the week I realized that soil humidity meters work by measuring resistance. Damp soil conducts electricity better, while dry soil conducts poorly.</p>
@@ -609,7 +611,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p>Below you can see how there&rsquo;s a bit of solder left over. There&rsquo;s gunk everywhere. Could it be cleaned with alcohol?</p>
 <p><img src="images/vlcsnap-2020-08-30-16h22m23s591.png" alt="Close-up of the GPIO"></p>
 <p>The Pi still works though.</p>
-]]></content></item><item><title>Various cat pictures</title><link>https://sjchiass.com/posts/cats/2020_w36_cats/</link><pubDate>Sun, 30 Aug 2020 15:52:00 +0000</pubDate><guid>https://sjchiass.com/posts/cats/2020_w36_cats/</guid><description>I took photos of my cats sleeping and sneaking under the couch.</description><content type="html"><![CDATA[<h2 id="cats-in-various-states-of-rest">Cats in various states of rest</h2>
+]]></content></item><item><title>Various cat pictures</title><link>https://sjchiass.github.io/website/posts/cats/2020_w36_cats/</link><pubDate>Sun, 30 Aug 2020 15:52:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/cats/2020_w36_cats/</guid><description>I took photos of my cats sleeping and sneaking under the couch.</description><content type="html"><![CDATA[<h2 id="cats-in-various-states-of-rest">Cats in various states of rest</h2>
 <p>The cats love sleeping on my meditation cushion. The cushion happens to be the right size for them, so they can bundle up on it and relax.</p>
 <p><img src="images/20200827_132512.jpg" alt="Meditating cat"></p>
 <p>This morning my cat came to see me and decided to sleep on the chair. The cat overflows the edge because it&rsquo;s sleeping on its side.</p>
@@ -619,7 +621,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p>Here are two photos of the cat sneaking underneath the couch.</p>
 <p><img src="images/20200825_083929.jpg" alt="Couch cat A"></p>
 <p><img src="images/20200825_083947.jpg" alt="Couch cat B"></p>
-]]></content></item><item><title>Various air fryer dishes</title><link>https://sjchiass.com/posts/food/2020_w36_food/</link><pubDate>Sun, 30 Aug 2020 15:35:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2020_w36_food/</guid><description>Cooking many bits evenly</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>Various air fryer dishes</title><link>https://sjchiass.github.io/website/posts/food/2020_w36_food/</link><pubDate>Sun, 30 Aug 2020 15:35:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2020_w36_food/</guid><description>Cooking many bits evenly</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <h4 id="eggplant-wraps">Eggplant wraps</h4>
 <p>We had three Italian/Sicilian eggplants. I cubed two and put them in the air fryer, and the other one I sliced and pan fried. I also air fryer some bell peppers with onions. Everything going into the air fryer was coated in peanut oil, and the frying pan eggplants were fried in olive oil.</p>
 <p><img src="images/20200825_184412.jpg" alt="Wrap ingredients"></p>
@@ -646,7 +648,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <h3 id="future">Future</h3>
 <p>I&rsquo;m going to try more eggplants! I hadn&rsquo;t known that they&rsquo;re very tasty when thoroughly cooked.</p>
 <p>If I put less eggplant in the basket, will they cook and dry faster? It&rsquo;s worth a try.</p>
-]]></content></item><item><title>More experiments in garlic fingers</title><link>https://sjchiass.com/posts/food/2020_w35_food/</link><pubDate>Sun, 23 Aug 2020 15:30:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2020_w35_food/</guid><description>Needs more garlic butter!</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>More experiments in garlic fingers</title><link>https://sjchiass.github.io/website/posts/food/2020_w35_food/</link><pubDate>Sun, 23 Aug 2020 15:30:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2020_w35_food/</guid><description>Needs more garlic butter!</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <h4 id="garlic-fingers">Garlic fingers</h4>
 <p>I continue my quest to make authentic maritime garlic fingers. This time I added bacon bits to the mix.</p>
 <ul>
@@ -677,7 +679,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <h3 id="future">Future</h3>
 <p>I think the garlic fingers need one of two things: more garlic butter or more garlic. The extra garlic could come from a garlic paste.</p>
 <p>I&rsquo;m pretty sure the maritime garlic fingers are made with margarine mixed with garlic (paste?) and basil/oregano. While I think butter is great, the margarine might get closer to the correct texture and taste. It&rsquo;s possible that the extra moisture in margarine has an interesting effect.</p>
-]]></content></item><item><title>A disapointing Amazon voltmeter/ammeter</title><link>https://sjchiass.com/posts/electronics/2020_w35_electronics/</link><pubDate>Sun, 23 Aug 2020 14:57:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w35_electronics/</guid><description>A disapointing Amazon voltmeter/ammeter. I feel like I got less than I paid for, but maybe I&amp;rsquo;ve been spoiled by cheap and convenient electronics.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>A disapointing Amazon voltmeter/ammeter</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w35_electronics/</link><pubDate>Sun, 23 Aug 2020 14:57:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w35_electronics/</guid><description>A disapointing Amazon voltmeter/ammeter. I feel like I got less than I paid for, but maybe I&amp;rsquo;ve been spoiled by cheap and convenient electronics.</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <p>I started playing with the $10 voltmeter/ammeter I got from Amazon. It seems neat at first, but its lack of precision makes it less useful (or rather, useless). I don&rsquo;t see the use of this for electronics.</p>
 <p><img src="images/20200821_073646.jpg" alt="A simple meter"></p>
 <p>I rigged up a tupperware container to house it. Out the back I have lug connectors for the power supply and at the front I have headers for jumper wires. There are back connectors for 5V (meter&rsquo;s supply), positive voltage, and ground.</p>
@@ -696,7 +698,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p>More interesting for electronics would be to have it measure around 5V. Depending on how extreme I expect voltage drops to be, it could hang around 4-6V and give decent resolution (2mV).</p>
 <p>Since I&rsquo;m new to electronics, it&rsquo;s nice to have examples to work off from. This guide gives lots of useful information: <a href="https://www.instructables.com/id/Oscilloscope-in-a-Matchbox-Arduino/">https://www.instructables.com/id/Oscilloscope-in-a-Matchbox-Arduino/</a></p>
 <p>Step 11 of the above guide has a simple voltmeter.</p>
-]]></content></item><item><title>Starting a new container of plants on top of a bookcase</title><link>https://sjchiass.com/posts/plants/2020_w35_plants/</link><pubDate>Sun, 23 Aug 2020 14:31:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w35_plants/</guid><description>The Next Generation</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
+]]></content></item><item><title>Starting a new container of plants on top of a bookcase</title><link>https://sjchiass.github.io/website/posts/plants/2020_w35_plants/</link><pubDate>Sun, 23 Aug 2020 14:31:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w35_plants/</guid><description>The Next Generation</description><content type="html"><![CDATA[<h3 id="past-week">Past week</h3>
 <p>I got some bigger containers from the dollar store to grow the plants in. I tried following the intructions on the seed packet by putting the seeds deeper into the soil. This caused some issues as we&rsquo;ll see below.</p>
 <p>After only a few days the grass was able to break out from underground; though they had to do some heavy lifting in the process. As the plants have pushed upwards, the soil has overflowed the container.</p>
 <p><img src="images/20200823_135413.jpg" alt="Five days of growth"></p>
@@ -720,7 +722,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p>I wonder if the seeds could be suspended in perforated paper towel or some other absorbent material. Would the roots dangle down or propagate horizontally? What about the grass blades having enough support to stay upright? Cheesecloth or burlap may work.</p>
 <h4 id="grow-lamps">Grow lamps</h4>
 <p>There are some cheap grow lamps on Amazon. Comparing them against normal light and sunlight could be interesting.</p>
-]]></content></item><item><title>OBS; miscellaneous electronics</title><link>https://sjchiass.com/posts/electronics/2020_w34_electronics/</link><pubDate>Sun, 16 Aug 2020 20:34:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w34_electronics/</guid><description>OBS; miscellaneous electronics</description><content type="html"><![CDATA[<h3 id="obs-and-streaming">OBS and streaming</h3>
+]]></content></item><item><title>OBS; miscellaneous electronics</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w34_electronics/</link><pubDate>Sun, 16 Aug 2020 20:34:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w34_electronics/</guid><description>OBS; miscellaneous electronics</description><content type="html"><![CDATA[<h3 id="obs-and-streaming">OBS and streaming</h3>
 <p>I&rsquo;ve been able to set up OBS Studio to output its video to a webcam. This should let me share desktops during video calls and even switch between multiple webcams. OBS Studio is used for streaming.</p>
 <p>Getting OBS to output to a webcam requires <a href="https://github.com/umlaeute/v4l2loopback">v4l2loopback</a>. It&rsquo;s a Linux kernel module that will create a virtual <code>/dev/video</code> device that can receive video data and make it available as a webcam feed. As far as Discord/Skype/etc knows, your stream will just be another webcam.</p>
 <p>I was able to get <code>v4l2loopback</code> to work on Ubuntu 18.04 and Fedora 32. In both cases it turned out easier that expected: just <code>git clone</code>, <code>make</code>, and <code>sudo make install</code>. The documentation warns you about mixing kernel and kernel header versions (or Linux will &ldquo;spit in your eye&rdquo;), but I haven&rsquo;t had problems yet.</p>
@@ -739,7 +741,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p>The neat thing about this is that the phone battery isn&rsquo;t meant to operate at 3.8V as I first thought. With a 3.8V supply the phone will power up but immediately power off: it thinks the battery is critically low. The phone will only be happy at 4.0V to 4.3V, with the higher voltage registering as a &ldquo;full&rdquo; battery.</p>
 <p><img src="images/20200811_201008.jpg" alt="Powered phone at 4.2V"></p>
 <p>The phone was easy to handle thanks to the good clip-on leads. Sadly, there was nothing important on the phone itself.</p>
-]]></content></item><item><title>Plants attacked by cats</title><link>https://sjchiass.com/posts/plants/2020_w34_plants/</link><pubDate>Sun, 16 Aug 2020 20:34:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w34_plants/</guid><description>Plants</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
+]]></content></item><item><title>Plants attacked by cats</title><link>https://sjchiass.github.io/website/posts/plants/2020_w34_plants/</link><pubDate>Sun, 16 Aug 2020 20:34:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w34_plants/</guid><description>Plants</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
 <p>My first adventures in cat grass growing came to its natural end.</p>
 <p>My cats ate it.</p>
 <p>I had moved the grass to the window since the plants had gotten too tall for the small lamp. I had also added a small fan to make them sway in the breeze, which is supposed to exercise them and make them tougher.</p>
@@ -756,7 +758,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p>I need to fix my plant growing setup. With some wood I&rsquo;ll build a structure for the light to come from higher above. I&rsquo;ll raise the plants or the structure with books, as needed. The important thing if for the light to come down directly.</p>
 <p>At the store I was able to get a lightbulb receptacle that can plug into a wall outlet. As long as I&rsquo;m able to secure it (duct tape?), I can position my light source it more freely.</p>
 <p><img src="images/20200816_193145.jpg" alt="A new stronger bulb with a receptacle"></p>
-]]></content></item><item><title>Progress on both rpi temperatures and cat grass manufacturing</title><link>https://sjchiass.com/posts/plants/2020_w33_plants/</link><pubDate>Sun, 09 Aug 2020 19:44:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w33_plants/</guid><description>Progress on both rpi temperatures and cat grass manufacturing.</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
+]]></content></item><item><title>Progress on both rpi temperatures and cat grass manufacturing</title><link>https://sjchiass.github.io/website/posts/plants/2020_w33_plants/</link><pubDate>Sun, 09 Aug 2020 19:44:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w33_plants/</guid><description>Progress on both rpi temperatures and cat grass manufacturing.</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
 <p>I germinated the seeds and planted them. They were slow to get going but now they&rsquo;re growing like, well, weeds.</p>
 <p>Yesterday they were tiny.</p>
 <p><img src="images/20200808_080757.jpg" alt="Small grass"></p>
@@ -771,7 +773,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p><img src="images/vlcsnap-2020-08-09-17h50m21s554.png" alt="Perlite?"></p>
 <h3 id="this-week">This week</h3>
 <p>I&rsquo;m going to let it grow. I&rsquo;ve wondered a little whether I should get cheap grow lights from Amazon and see if they beat my current bulb or natural sunlight. Could be interesting.</p>
-]]></content></item><item><title>rpi temperatures and cat grass</title><link>https://sjchiass.com/posts/electronics/2020_w33_electronics/</link><pubDate>Sun, 09 Aug 2020 19:44:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w33_electronics/</guid><description>Progress on both rpi temperatures and cat grass manufacturing.</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
+]]></content></item><item><title>rpi temperatures and cat grass</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w33_electronics/</link><pubDate>Sun, 09 Aug 2020 19:44:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w33_electronics/</guid><description>Progress on both rpi temperatures and cat grass manufacturing.</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
 <p>GitHub: <a href="https://github.com/sjchiass/pitemp">https://github.com/sjchiass/pitemp</a></p>
 <p>I had been thinking a lot about the best way to get good temperature data for my raspberry pi temperature project, and it all worked out alright.</p>
 <p>My old way of collecting data had an issue with heat building up in the case and having biased datasets for closed cases. The data was good for simulating day-to-day use, but in day-to-day use of a raspberry pi, those little plastic cases are little ovens. Here is the problematic data.</p>
@@ -793,7 +795,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p><img src="images/voltmeter.jpg" alt="LCD meter"></p>
 <p>Now I&rsquo;ll be able to measure voltage and current when playing with case fans! With only one multimeter, I can only measure or voltage at once. (And I have to move things around a bit.)</p>
 <p><img src="images/20200704_192253.jpg" alt="Old setup"></p>
-]]></content></item><item><title>I consider growing plants</title><link>https://sjchiass.com/posts/plants/2020_w32_plants/</link><pubDate>Tue, 04 Aug 2020 13:15:00 +0000</pubDate><guid>https://sjchiass.com/posts/plants/2020_w32_plants/</guid><description>I consider growing plants.</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
+]]></content></item><item><title>I consider growing plants</title><link>https://sjchiass.github.io/website/posts/plants/2020_w32_plants/</link><pubDate>Tue, 04 Aug 2020 13:15:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/plants/2020_w32_plants/</guid><description>I consider growing plants.</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
 <p>I&rsquo;ve had a 5V USB water pump and a soild humidity sensor for years, but I have never used them. I had thought of buying an aquarium to make a large safe test area.</p>
 <p><img src="images/20200804_141653.jpg" alt="The pump and sensors"></p>
 <h3 id="this-week">This week</h3>
@@ -814,7 +816,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p><img src="images/20200804_141716.jpg" alt="Well-lit lab"></p>
 <p>How do I find the desk lab? The easy access to the power supply and soldering station is great. The parts drawers are also convenient.</p>
 <p>The bad part? The multimeter and its probes take up space and are always a mess.</p>
-]]></content></item><item><title>Modelling pi temperatures</title><link>https://sjchiass.com/posts/electronics/2020_w32_electronics/</link><pubDate>Tue, 04 Aug 2020 13:15:00 +0000</pubDate><guid>https://sjchiass.com/posts/electronics/2020_w32_electronics/</guid><description>I continue work on modelling pi temperatures</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
+]]></content></item><item><title>Modelling pi temperatures</title><link>https://sjchiass.github.io/website/posts/electronics/2020_w32_electronics/</link><pubDate>Tue, 04 Aug 2020 13:15:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/electronics/2020_w32_electronics/</guid><description>I continue work on modelling pi temperatures</description><content type="html"><![CDATA[<h3 id="past-work">Past work</h3>
 <p>I&rsquo;ve been logging CPU temperatures of my Raspberry Pi 3B+ for past several weeks. I add and remove parts of its case and run tests for hours. I&rsquo;ve put the data in OLS models to see how different components affect temperatures. I&rsquo;ve come to realize that this kind of modelling is &ldquo;descriptive&rdquo; but not too explanatory. This is because the data is generated from randomly stressing the CPU with 0/25/50/75/100% load. This data can answer the question &ldquo;what gets hot&rdquo; but now &ldquo;how much heat is evacuated by an open top&rdquo;?</p>
 <p>My problem has been that different case configurations have wildly different temperature ranges. A narrow range of temperature means less variety, and less variety means less for a model to work with. Left alone, a fully closed case will slowly work its way to 80C and stay there. This kind of data isn&rsquo;t great because it only shows a cluster of temperatures: the CPU throttles itself and cannot go higher, and the closed case keeps the heat inside. The added problem is that the series is not stationary either. The temperature will fluctuate at first, but when it reaches its plateau it ceases to fluctuate: the range of temperature depends on how long the test has been running.</p>
 <p><img src="images/timeseries.png" alt="Cases' time series"></p>
@@ -824,7 +826,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <p><img src="images/20200804_141854.jpg" alt="A test underway"></p>
 <p>The question is: how do I best adjust the script to capture good quality time series data? It&rsquo;s important that the CPU is allowed to build up heat, so cooldown cycles should not be started too soon (but too high and there is never cooldown). Latent case heat should be eliminated if possible, so the CPU should cool down to a fairly low temperature (50-55C) before working again.</p>
 <p>A bit of an annoying problem is that cases with fans neither reach high temperatures nor cool down very fast. How do I add more variety to their temperatures? I could enforce cooldowns at regular intervals, regardless of temperature. However, I should have a look at the data before going this route.</p>
-]]></content></item><item><title>My First Smoked Pulled Pork</title><link>https://sjchiass.com/posts/food/2020_w29_food/</link><pubDate>Fri, 26 Jun 2020 12:00:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2020_w29_food/</guid><description>My first attempt at making smoked pulled pork on the charcoal BBQ.</description><content type="html"><![CDATA[<p>Last summer I had the pleasure of trying lots of smoked BBQ pulled pork, so this year I decided to try cooking it myself. The results were quite good even if I only smoked the meat for 2 hours. The rub, the sauce, and a bit of smoke flavour made for great little sandwiches. If I were to try the recipe again, I would smoke the meat longer to get more of that rich applewood flavor.</p>
+]]></content></item><item><title>My First Smoked Pulled Pork</title><link>https://sjchiass.github.io/website/posts/food/2020_w29_food/</link><pubDate>Fri, 26 Jun 2020 12:00:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/food/2020_w29_food/</guid><description>My first attempt at making smoked pulled pork on the charcoal BBQ.</description><content type="html"><![CDATA[<p>Last summer I had the pleasure of trying lots of smoked BBQ pulled pork, so this year I decided to try cooking it myself. The results were quite good even if I only smoked the meat for 2 hours. The rub, the sauce, and a bit of smoke flavour made for great little sandwiches. If I were to try the recipe again, I would smoke the meat longer to get more of that rich applewood flavor.</p>
 <p>The pulled pork was great in a slice of bread. It was tender, tangy, and flavourful.</p>
 <p><img src="images/20200626_192839.jpg" alt="The pulled pork sandwich"></p>
 <h2 id="lessons">Lessons</h2>
@@ -894,7 +896,7 @@ lcd.print(vin * analogRead(A0) * adj / 1024.0);
 <h2 id="results">Results</h2>
 <p>The rub and the sauce made a tasty combination. The strong tang from the mustard and vinegar were partially offset by the garlic and spice from the rub. The high fat content of the meat made it very smooth. Unfortunately, there was not a lot of smoke flavour.</p>
 <p><img src="images/20200626_193156.jpg" alt="The resulting sandwich"></p>
-]]></content></item><item><title>A Very Short Introduction: Teeth</title><link>https://sjchiass.com/posts/misc/2018_w40_books/</link><pubDate>Sat, 06 Oct 2018 23:21:28 -0400</pubDate><guid>https://sjchiass.com/posts/misc/2018_w40_books/</guid><description>My review of a Very Short Introduction: Teeth</description><content type="html"><![CDATA[<p><em>A Very Short Introduction: Teeth</em> is my 28th VSI book read, and I enjoyed it. I had picked it up to read before my dentist&rsquo;s appointment, so that I would understand teeth terminology better. Since the book gives a nice wide introduction to teeth, I found that I ended up learning many things as well. I&rsquo;ll have to see if there&rsquo;s a VSI on dentistry.</p>
+]]></content></item><item><title>A Very Short Introduction: Teeth</title><link>https://sjchiass.github.io/website/posts/misc/2018_w40_books/</link><pubDate>Sat, 06 Oct 2018 23:21:28 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2018_w40_books/</guid><description>My review of a Very Short Introduction: Teeth</description><content type="html"><![CDATA[<p><em>A Very Short Introduction: Teeth</em> is my 28th VSI book read, and I enjoyed it. I had picked it up to read before my dentist&rsquo;s appointment, so that I would understand teeth terminology better. Since the book gives a nice wide introduction to teeth, I found that I ended up learning many things as well. I&rsquo;ll have to see if there&rsquo;s a VSI on dentistry.</p>
 <p>This VSI has a well-defined topic (teeth), covers multiple aspects of teeth (function, evolution, humans), and is a clear and understandable read. What I found most interesting was the evolution of teeth, how teeth cusps slowly reconfigure themselves. Once in a while I feel the sharpness of my teeth and recall that certain animals have self-sharpening teeth. While the knowledge may not be practical, but it was still interesting for me to learn.</p>
 <ul>
 <li>Book: <a href="https://global.oup.com/academic/product/teeth-a-very-short-introduction-9780199670598">https://global.oup.com/academic/product/teeth-a-very-short-introduction-9780199670598</a></li>
