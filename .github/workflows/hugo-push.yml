@@ -38,5 +38,5 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           key: ${{ secrets.KEY }}
           source: "./public"
-          target: "test"
+          target: "gh_page"
           rm: true
