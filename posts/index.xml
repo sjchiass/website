@@ -1,5 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 08:47:04 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo with GH actions</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</link><pubDate>Sun, 09 May 2021 08:47:04 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</guid><description>My newbie GH Action setup for updating my website</description><content type="html"><![CDATA[<h2 id="basic-idea">Basic idea</h2>
-<p>I have GitHub actions build the Hugo website then I use scp to copy it over to my remote server.</p>
+<p>I have GitHub actions build the Hugo website then I use <code>scp</code> to copy it over to my remote server. It&rsquo;s a few extra steps to also deploy the site to GitHub Pages, so I do that too.</p>
+<p>It&rsquo;s a little project. Here are the steps.</p>
+<ol>
+<li>Set up SSH keys to give GitHub access to your server</li>
+<li>Add &ldquo;secrets&rdquo; to GitHub so that your Actions can access hidden variables</li>
+<li>Add the Action script to your repo (build website &gt; upload to server &gt; build for GH pages)</li>
+<li>Create a cron job on your server to pick up the files</li>
+</ol>
 <h2 id="ssh-keys">SSH keys</h2>
 <p>The idea here is to generate an SSH key on your computer. You then send the public key to the remote server, and you paste your private key into GitHub. That way GitHub can log into your server and dump the new files there.</p>
 <p>If ever something goes wrong with GitHub secrets, you can log into your server and delete the key.</p>
@@ -11,6 +18,13 @@
 <pre><code>Settings -&gt; Secrets -&gt; New repository secret
 </code></pre><p>Name the secret <code>KEY</code> and paste in the private key contents. You can read more about GitHub secrets here: <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">https://docs.github.com/en/actions/reference/encrypted-secrets</a></p>
 <p>If you added a passphrase to your key, add it to a <code>PASSPHRASE</code> secret.</p>
+<h2 id="other-secrets">Other secrets</h2>
+<p>Add these other secrets to GitHub. You have to specify the <code>USERNAME</code>, <code>HOST</code> AND <code>PORT</code> separately.</p>
+<ul>
+<li><code>USERNAME</code> the user you want to log into for the scp</li>
+<li><code>HOST</code> probably an IP address</li>
+<li><code>PORT</code> the port number, probably 22 if kept the default</li>
+</ul>
 <h2 id="github-action">GitHub action</h2>
 <p>Here is my full <code>.yml</code> file. The last step <code>Upload</code> is when the files are copied.</p>
 <p>You can read more about <code>scp-action</code> here: <a href="https://github.com/appleboy/scp-action">https://github.com/appleboy/scp-action</a></p>
@@ -53,6 +67,7 @@ jobs:
           rm: true
 </code></pre><p>I also want to deploy to GitHub pages, so I add these steps at the end.</p>
 <p>The <code>sed</code> command edits my Hugo <code>config.toml</code> to point to the GH pages address. I can then deploy, and the site will work properly. If you don&rsquo;t do this, the site will be broken.</p>
+<p>Pro tip: you can run multiple commands by using <code>run: |</code>. You can see this below.</p>
 <pre><code>      - name: Config
         run: |
           sed -i &quot;s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=&quot; config.toml
@@ -63,14 +78,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-</code></pre><h2 id="secrets">Secrets</h2>
-<p>Add these other secrets to GitHub. You have to specify the <code>USERNAME</code>, <code>HOST</code> AND <code>PORT</code> separately.</p>
-<ul>
-<li><code>USERNAME</code> the user you want to log into for the scp</li>
-<li><code>HOST</code> probably an IP address</li>
-<li><code>PORT</code> the port number, probably 22 if kept the default</li>
-</ul>
-<h2 id="final-step-cron-job">Final step: cron job</h2>
+</code></pre><h2 id="final-step-cron-job">Final step: cron job</h2>
 <p>On your server, run <code>sudo crontab -e</code> to start a regular job as <code>ROOT</code>. This will regularly copy your files to the web server.</p>
 <p>A file will open in your console, where you can paste</p>
 <pre><code>0 * * * * rsync -avh /home/username/gh_page/public/ /var/www/example.com/
