@@ -1,0 +1,77 @@
+---
+title: The magic of bread
+date: 2021-03-22T20:44:00
+tags:
+- food
+- bread
+- timelapse
+author: Sebastien Chiasson
+summary: I baked bread from frozen dough twice. I've recording both. The results are not perfect but still tasty.
+toc: true
+---
+
+## Background
+
+I bought a 5-pack of frozen bread dough.
+
+The instructions say to defrost the dough overnight in the fridge. I don't think I read the rest of the instructions. I added 30ml of salted butter in the pan and on top of the frozen dough.
+
+Let's bake!
+
+## Videos and images
+
+### Bread #1
+
+This is a single bread loaf in a pan.
+
+{{< youtube XTki0d15eFw >}}
+
+Turned out okay, but not as big as I wanted.
+
+![A diminutive loaf](images/20210315_175640.jpg)
+
+### Bread #2
+
+Bread number 2 is in fact two breads together. The oven light was acting a bit crazy. I'm not sure if it was the light or the webcam auto-adjusting.
+
+![Two frozen buttered loaves](images/20210322_130818.jpg)
+
+{{< youtube vOlqADRz4Is >}}
+
+The bread(s) ended up being a bit too enormous.
+
+![Big bread with flash](images/20210322_180310.jpg)
+
+![Big bread without flash, fork punctures visible](images/20210322_180330.jpg)
+
+## Setup
+
+I put a tripod and my new webcam in front of the stove.
+
+The raspberry pi I put on top of the microwave oven. I used the microwave a few times to heat my lunch, and there were no ill effects to the little computer. No doubt the wooden cutting boards absorbed the radiation.
+
+![Camera against the oven, computer on the microwave](images/20210315_122519.jpg)
+
+On the raspberry pi, I ran this command to take a snapshot every minute. Each filename is timestamped.
+
+```console
+while sleep 60; do fswebcam -r 1920x1080 ./bread/$(date +%F%T).jpg; done
+```
+
+## Making the videos
+
+The snapshots were all saved as images in the folder. I then used `ffmpeg` to make the videos.
+
+```console
+cat $(find . -maxdepth 1 -name "*.jpg" | sort -V) | ffmpeg -framerate 6 -i - -c:v libx264 -profile:v high -crf 20 -pix_fmt yuv420p bread.mp4
+```
+
+I used code from these two pages. The second page explained how to just use all files without having to rename them.
+
+  * <https://askubuntu.com/questions/610903/how-can-i-create-a-video-file-from-a-set-of-jpg-images>
+  * <https://askubuntu.com/questions/1183076/convert-all-the-png-files-in-a-folder-to-video>
+
+## Cleaning the oven window
+
+On the second run, I cleaned the oven window with baking soda and a bit of vinegar. I scrubbed vigorously with a sponge for about 10 minutes and it was all clean!
+
