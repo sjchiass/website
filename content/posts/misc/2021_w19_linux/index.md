@@ -93,7 +93,9 @@ The `sed` command edits my Hugo `config.toml` to point to the GH pages address. 
 
 ```
       - name: Config
-        run: sed -i "s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=" config.toml
+        run: |
+          sed -i "s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=" config.toml
+          hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
