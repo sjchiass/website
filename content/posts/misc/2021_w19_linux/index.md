@@ -10,7 +10,15 @@ summary: My newbie GH Action setup for updating my website
 
 ## Basic idea
 
-I have GitHub actions build the Hugo website then I use scp to copy it over to my remote server.
+I have GitHub actions build the Hugo website then I use `scp` to copy it over to my remote server. It's a few extra steps to also deploy the site to GitHub Pages, so I do that too.
+
+It's a little project. Here are the steps.
+
+1. Set up SSH keys to give GitHub access to your server
+2. Add "secrets" to GitHub so that your Actions can access hidden variables
+3. Add the Action script to your repo (build website > upload to server > build for GH pages)
+4. Create a cron job on your server to pick up the files
+
 
 ## SSH keys
 
@@ -39,6 +47,14 @@ Settings -> Secrets -> New repository secret
 Name the secret `KEY` and paste in the private key contents. You can read more about GitHub secrets here: <https://docs.github.com/en/actions/reference/encrypted-secrets>
 
 If you added a passphrase to your key, add it to a `PASSPHRASE` secret.
+
+## Other secrets
+
+Add these other secrets to GitHub. You have to specify the `USERNAME`, `HOST` AND `PORT` separately.
+
+  * `USERNAME` the user you want to log into for the scp
+  * `HOST` probably an IP address
+  * `PORT` the port number, probably 22 if kept the default
 
 ## GitHub action
 
@@ -91,6 +107,8 @@ I also want to deploy to GitHub pages, so I add these steps at the end.
 
 The `sed` command edits my Hugo `config.toml` to point to the GH pages address. I can then deploy, and the site will work properly. If you don't do this, the site will be broken.
 
+Pro tip: you can run multiple commands by using `run: |`. You can see this below.
+
 ```
       - name: Config
         run: |
@@ -103,14 +121,6 @@ The `sed` command edits my Hugo `config.toml` to point to the GH pages address. 
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
 ```
-
-## Secrets
-
-Add these other secrets to GitHub. You have to specify the `USERNAME`, `HOST` AND `PORT` separately.
-
-  * `USERNAME` the user you want to log into for the scp
-  * `HOST` probably an IP address
-  * `PORT` the port number, probably 22 if kept the default
 
 ## Final step: cron job
 
