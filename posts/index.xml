@@ -1,4 +1,74 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.com/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 20 Apr 2021 07:21:00 +0000</lastBuildDate><atom:link href="https://sjchiass.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>BBQ baked beans in an Instant Pot</title><link>https://sjchiass.com/posts/food/2021_w16_food/</link><pubDate>Tue, 20 Apr 2021 07:21:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2021_w16_food/</guid><description>I used BBQ sauce to season beans and then cooked them for a few hours. With the BBQ sauce they take a longer time to cook. The results are very tasty.</description><content type="html"><![CDATA[<h2 id="background">Background</h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.com/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 08:47:04 -0400</lastBuildDate><atom:link href="https://sjchiass.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo with GH actions</title><link>https://sjchiass.com/posts/misc/2021_w19_linux/</link><pubDate>Sun, 09 May 2021 08:47:04 -0400</pubDate><guid>https://sjchiass.com/posts/misc/2021_w19_linux/</guid><description>My newbie GH Action setup for updating my website</description><content type="html"><![CDATA[<h2 id="basic-idea">Basic idea</h2>
+<p>I have GitHub actions build the Hugo website then I use scp to copy it over to my remote server.</p>
+<h2 id="ssh-keys">SSH keys</h2>
+<p>The idea here is to generate an SSH key on your computer. You then send the public key to the remote server, and you paste your private key into GitHub. That way GitHub can log into your server and dump the new files there.</p>
+<p>If ever something goes wrong with GitHub secrets, you can log into your server and delete the key.</p>
+<p>First, generate an ssh key on your computer. Put it in a separate place so that you don&rsquo;t mix it up with other keys.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -f ~/temp/id_rsa
+</code></pre></div><p>You can then send the public key to your server. If you want to get rid of the key, delete it from <code>authorized_keys</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat ~/temp/id_rsa.pub | ssh user@hostname <span style="color:#e6db74">&#39;cat &gt;&gt; .ssh/authorized_keys&#39;</span>
+</code></pre></div><p>Pasting a secret into GitHub is pretty easy. In your repository, navigate here:</p>
+<pre><code>Settings -&gt; Secrets -&gt; New repository secret
+</code></pre><p>Name the secret <code>KEY</code> and paste in the private key contents. You can read more about GitHub secrets here: <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">https://docs.github.com/en/actions/reference/encrypted-secrets</a></p>
+<p>If you added a passphrase to your key, add it to a <code>PASSPHRASE</code> secret.</p>
+<h2 id="github-action">GitHub action</h2>
+<p>Here is my full <code>.yml</code> file. The last step <code>Upload</code> is when the files are copied.</p>
+<p>You can read more about <code>scp-action</code> here: <a href="https://github.com/appleboy/scp-action">https://github.com/appleboy/scp-action</a></p>
+<p>I stuck to the basic Hugo action. I tried with the latest version of Hugo, but that didn&rsquo;t work. You can tweak your actions by reading the README: <a href="https://github.com/peaceiris/actions-hugo">https://github.com/peaceiris/actions-hugo</a></p>
+<pre><code>name: hugo deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.81.0'
+          extended: true
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          username: ${{ secrets.USERNAME }}
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          key: ${{ secrets.KEY }}
+          source: &quot;./public&quot;
+          target: &quot;gh_page&quot;
+          rm: true
+</code></pre><h2 id="secrets">Secrets</h2>
+<p>Add these other secrets to GitHub. You have to specify the <code>USERNAME</code>, <code>HOST</code> AND <code>PORT</code> separately.</p>
+<ul>
+<li><code>USERNAME</code> the user you want to log into for the scp</li>
+<li><code>HOST</code> probably an IP address</li>
+<li><code>PORT</code> the port number, probably 22 if kept the default</li>
+</ul>
+<h2 id="final-step-cron-job">Final step: cron job</h2>
+<p>On your server, run <code>sudo crontab -e</code> to start a regular job as <code>ROOT</code>. This will regularly copy your files to the web server.</p>
+<p>A file will open in your console, where you can paste</p>
+<pre><code>0 * * * * rsync -avh /home/username/gh_page/public/ /var/www/example.com/
+</code></pre>]]></content></item><item><title>BBQ baked beans in an Instant Pot</title><link>https://sjchiass.com/posts/food/2021_w16_food/</link><pubDate>Tue, 20 Apr 2021 07:21:00 +0000</pubDate><guid>https://sjchiass.com/posts/food/2021_w16_food/</guid><description>I used BBQ sauce to season beans and then cooked them for a few hours. With the BBQ sauce they take a longer time to cook. The results are very tasty.</description><content type="html"><![CDATA[<h2 id="background">Background</h2>
 <p>I bought an Instant Pot months ago, and I&rsquo;ve been cooking a lot of beans in it. Most of the time I make chili-like beans and soups, but one day I decided to try BBQ sauce as the only seasoning.</p>
 <p>The internet warns about cooking beans in any kind of acid. They&rsquo;ll be hard they say. The acidic BBQ sauce I use does make the beans more stubborn to cook.</p>
 <p>This is my second time using this recipe. The beans are easy to make, well-cooked and tasty.</p>
