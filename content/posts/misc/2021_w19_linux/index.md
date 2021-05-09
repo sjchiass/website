@@ -1,7 +1,6 @@
 ---
 title: Hugo with GH actions
 date: 2021-05-09T08:47:04-04:00
-category:
 tags:
  - linux
  - hugo
@@ -75,12 +74,6 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-
       - name: Upload
         uses: appleboy/scp-action@master
         with:
@@ -92,6 +85,21 @@ jobs:
           source: "./public"
           target: "gh_page"
           rm: true
+```
+
+I also want to deploy to GitHub pages, so I add these steps at the end.
+
+The `sed` command edits my Hugo `config.toml` to point to the GH pages address. I can then deploy, and the site will work properly. If you don't do this, the site will be broken.
+
+```
+      - name: Config
+        run: sed -i "s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=" config.toml
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
 ```
 
 ## Secrets
