@@ -1,37 +1,49 @@
 title = "Errata"
 baseURL = "https://sjchiass.com/"
 languageCode = "en-us"
-theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+theme = ["github.com/Track3/hermit"]
 
 DefaultContentLanguage = "en"
 SectionPagesMenu = "main"
 Paginate = 10
+rssLimit = 10  # Maximum number of items in the RSS feed.
 googleAnalytics = ""
 enableRobotsTXT = true
 
 enableEmoji = true
 
-[sitemap]
-  changefreq = "monthly"
-  priority = 0.5
-  filename = "sitemap.xml"
+[taxonomies]
+  tag = "tags"
+
+[author]
+  name = "Sebastien Chiasson"
 
 [params]
-  favicon = "/images/bathcat.png"
-  site_logo = "/images/bathcat.png"
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+  # Theme color
+  themeColor = "#494f5c"
+  # Hermit
+  relatedPosts = true
+  code_copy_button = true
+  # Other
   description = "Various things."
-  facebook = "https://www.facebook.com/sjchiass"
-  twitter = "https://twitter.com/sjchiass"
-  instagram = ""
-  youtube = "https://www.youtube.com/channel/UCcogaNQW-pBUFz6G5kKCFsA"
-  github = "https://github.com/sjchiass"
-  gitlab = ""
-  linkedin = ""
-  mastodon = ""
-  slack = ""
-  stackoverflow = ""
-  reddit = "https://www.reddit.com/user/sjchiass"
-  rss = "/index.xml"
-  background_color_class = "bg-black"
-  recent_posts_number = 5
-  show_reading_time = true
+  customCSS = ["/css/accordion.css", "/css/collapsible.css"]
+  
+  [[params.social]]
+    name = "twitter"
+    url = "https://twitter.com/sjchiass"
+
+  [[params.social]]
+    name = "github"
+    url = "https://github.com/sjchiass"
+
+  [[params.social]]
+    name = "youtube"
+    url = "https://www.youtube.com/channel/UCcogaNQW-pBUFz6G5kKCFsA"
+
+  [[params.social]]
+    name = "facebook"
+    url = "https://www.facebook.com/sjchiass"

@@ -1,0 +1,33 @@
+{{ define "header" }}
+{{ partialCached "header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+	<main class="site-main section-inner thin animated fadeIn faster">
+		<h1>{{ .Title }}</h1>
+		{{- if .Content }}
+		<div class="content">
+			{{ .Content }}
+		</div>
+		{{- end }}
+		
+    {{ $data := .Data }}
+
+		<div class="posts-group">
+			<ul class="posts-list">
+				{{- range $key, $value := .Data.Terms.ByCount }}
+				<li class="post-item">
+					<a href="{{ $.Site.LanguagePrefix | absURL }}/{{ $data.Plural }}/{{ $value.Name | urlize }}/">
+						<span class="post-title">{{$value.Name}}</span>
+						<span class="post-day">{{ $value.Count }}</span>
+					</a>
+				</li>
+				{{- end }}
+			</ul>
+		</div>
+	</main>
+{{ end }}
+
+{{ define "footer" }}
+{{ partialCached "footer.html" . }}
+{{ end }}

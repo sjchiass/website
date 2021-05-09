@@ -2,4 +2,4 @@ module github.com/sjchiass/website
 
 go 1.15
 
-require github.com/theNewDynamic/gohugo-theme-ananke v2.6.7+incompatible // indirect
+require github.com/Track3/hermit v1.2.2 // indirect
