@@ -23,12 +23,6 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-
       - name: Upload
         uses: appleboy/scp-action@master
         with:
@@ -40,3 +34,12 @@ jobs:
           source: "./public"
           target: "gh_page"
           rm: true
+
+      - name: Config
+        run: sed -i "s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=" config.toml
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
