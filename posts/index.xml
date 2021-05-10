@@ -1,6 +1,49 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 08:47:04 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo with GH actions</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</link><pubDate>Sun, 09 May 2021 08:47:04 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</guid><description>My newbie GH Action setup for updating my website</description><content type="html"><![CDATA[<h2 id="basic-idea">Basic idea</h2>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 21:09:20 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>VSI Sound</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_books/</link><pubDate>Sun, 09 May 2021 21:09:20 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_books/</guid><description>My review of A Very Short Introduction to Sound</description><content type="html"><![CDATA[<p>This is another great Very Short Introduction. I almost always love these more &ldquo;basic science&rdquo; books. I find that they give a lot of interesting information. Each chapter tends to talk about another new facet of the book&rsquo;s topic. Very fun!</p>
+<p>This book on <strong>sound</strong> is just like that. Each chapter presents a different facet of sound, and each chapter is full of interesting information. I read this VSI very quickly and was very fascinated with sound afterwards.</p>
+<p>(I had just started playing my MIDI keyboard and was curious about musical notes.)</p>
+<h2 id="the-nature-of-sound">The nature of sound</h2>
+<p>This is an appropriately-titled chapter that covers the physical properties of sound.</p>
+<p>Sounds are alternating regions of high and low pressure. If the diaphragm of a speaker pushes out, it will cram molecules together and these compressed molecules will transmit this compression in a growing sphere. Following this high-pressure wave will be a low-pressure wave, a rarefaction.</p>
+<p>Sounds are affected by a few things. Hotter air lets sounds travel faster. Concave surfaces can reflect and concentrate sounds. The Doppler effect makes approaching objects sounds more high-pitched. Materials with high acoustic impedance, like soft rubber, absorb sound and transform it into heat. Sounds can diffract around corners: if you are behind a high wall, lower frequency sounds from beyond will difract toward you but higher-pitched ones will not. Sounds can also interfere with each other, possibly cancelling each other out if they&rsquo;re in anti-phase.</p>
+<p>Measuring the power or loudness of sounds is tricky. Decibels are the unit of measure, but they&rsquo;re tricky. Decibels range from the quietest sounds at 0dB to the loudest sounds we can hear painfully 130dB.</p>
+<h2 id="sounds-in-harmony">Sounds in harmony</h2>
+<p>This chapter has a few interesting tidbits about how humans interact with sounds. I&rsquo;m pretty ignorant about music, so this chapter has been my first introduction to it.</p>
+<p>First, musical instruments are identified by their attack sounds. The author says that if you remove these attack sounds, it becomes difficult to identify the instruments. I found a clip of this online, and it&rsquo;s like trying to identify an instrument by the tone made by playing a note and holding the sustain pedal in a synthesizer.</p>
+<p>I&rsquo;m not a musical person, so some of this is interesting. Having a good pitch means keeping the right ratios between notes. So if one note is 300Hz and the next octave up is 600Hz, you would be flat if the next note is below 600Hz and would be sharp if the next note is above 600Hz. It used to be that these things weren&rsquo;t standard, and instruments were not calibrated the same in different countries. If instruments had different pitch, it was noticed.</p>
+<p>Speaking of which, octaves are doublings of frequencies. Apparently, notes one octave apart sound good. I&rsquo;ve tried this but I don&rsquo;t see what the author means. Different instruments will be capable of only so many octaves: from the lowest frequency to the highest, the instrument can double its output frequency only so many times.</p>
+<p>Lots of these things were discovered by ancient researchers using monochords: <a href="https://en.wikipedia.org/wiki/Monochord">https://en.wikipedia.org/wiki/Monochord</a></p>
+<p>The black keys on a piano are a five-tone scale (pentatonic) per octave. If I&rsquo;ve understood it right, the white keys are semitones that have gaps: there should be 12 semitones per octave but instead we only use 7 in practice. If we use these semitone gaps, we call then A# (A sharp)to mean one semitone above A.</p>
+<p>These notes can either be played together or singly. Playing notes together is polyphonic, like in a chord. In Western music a few polyphonic notes are used, while in Eastern music more notes are used but they tend to be monophonic.</p>
+<h2 id="hearing-sound">Hearing sound</h2>
+<p>This chapter covers how humans hear and make sounds. The author summarizes a lot of interesting facts. The interesting ones are</p>
+<ul>
+<li>We can hear 10 octaves, similar to a piano</li>
+<li>We can feel more than that, but not really clearly hear them</li>
+<li>We can distinguish between quarters of semitones, and even more with training</li>
+<li>We can hear from 0dB to 130dB</li>
+<li>Our ability to distinguish the direction of sound is pretty bad compared to other animals</li>
+</ul>
+<p>The chapter also covers a bit of human speech and how sounds are made by vocal chords.</p>
+<h2 id="electronic-sound">Electronic sound</h2>
+<p>The author summarizes the different microphone types, which is very interesting.</p>
+<p>Dynamic microphones are made with diaphragm displacing a coil. Condenser microphones work with capacitance, and they response faster to sounds and frequencies. Crystal and ceramic microphones use the piezoelectric effect of a voltage being created when compressed, and these are used in headsets. Interestingly, cellphones use solid-state condenser microphones called MEMS.</p>
+<p>The author talks a bit about loudspeakers and what is sound fidelity. He also talks about how sounds were recorded, from vinyl, to tape, to CD and MP3. Interestingly, the compression of MP3 is not just about lossless information compression but also an algorithm that selects sounds humans are most likely to hear. Unfortunately the author doesn&rsquo;t got further into this.</p>
+<h2 id="ultrasound-and-infrasound">Ultrasound and infrasound</h2>
+<p>We can&rsquo;t hear ultrasounds. They have some neat properties. Sound waves are only affected by objects larger than they are, so the smaller ultrasounds can bounce off of smaller and smaller objects. Ultrasounds also form better beams, concentrating more energy into a smaller volume.</p>
+<p>The author explains a lot of how bats use ultrasounds to navigate. The bats use clicking sounds. Humans use similar methods with radars, but there are key differences with how bats and radars operate.</p>
+<p>Ultrasound machines use piezoeletric crystals to both emit ultrasound and receive the reflected waves. As the sounds bounce around different parts of the body, a 3D image can be formed.</p>
+<p>Ultrasounds can also be used to sterilize equipment. They can also solder electronic components together while keeping the surrounding materials relatively cool.</p>
+<p>Infrasounds can travel very far. The author gives the example of erupting volcanoes.</p>
+<h2 id="sound-underwater-and-underground">Sound underwater and underground</h2>
+<p>There are more sounds underwater than people used to think. The author tells of underwater buoys and underwater mines being set off by a very loud fish called the croaker; apparently these fish make lots of noise to greet the dawn, like roosters.</p>
+<p>Croaker fish: <a href="https://en.wikipedia.org/wiki/Sciaenidae">https://en.wikipedia.org/wiki/Sciaenidae</a></p>
+<p>Sounds underwater were originally bells ringing underneath docks, and ships had stereo microphones to listen and judge the direction in poor weather. More sophisticated system have since been developed, from active and passive to single sensors to arrays. Ultrasounds are used for faster and more detailed readings.</p>
+<p>Sounds also travel through the earth. Seismographs are either dynamic microphones or MEMS. Microphones were also used to detect tunnelling enemies in war. Microphones can also detect nuclear tests and are a way of knowing if someone is violating test bans.</p>
+<h2 id="sound-out-of-place">Sound out of place</h2>
+<p>When sound becomes noise, it&rsquo;s usually because we don&rsquo;t like it. Hearing someone else&rsquo;s music is noise, but our own music is okay. There are a lot of sources of noise: automobiles mitigate this with mufflers but aircraft have a hard time muffling jet engines. Technologies exist to cut down on noise, like active noise cancelling and various types of coatings and coverings.</p>
+]]></content></item><item><title>Hugo with GH actions</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</link><pubDate>Sun, 09 May 2021 08:47:04 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_linux/</guid><description>My newbie GH Actions setup for updating a website</description><content type="html"><![CDATA[<h2 id="basic-idea">Basic idea</h2>
 <p>I have GitHub actions build the Hugo website then I use <code>scp</code> to copy it over to my remote server. It&rsquo;s a few extra steps to also deploy the site to GitHub Pages, so I do that too.</p>
-<p>It&rsquo;s a little project. Here are the steps.</p>
+<p>It&rsquo;s a simple little project. Here are the steps.</p>
 <ol>
 <li>Set up SSH keys to give GitHub access to your server</li>
 <li>Add &ldquo;secrets&rdquo; to GitHub so that your Actions can access hidden variables</li>
@@ -14,18 +57,21 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -f ~/temp/id_rsa
 </code></pre></div><p>You can then send the public key to your server. If you want to get rid of the key, delete it from <code>authorized_keys</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat ~/temp/id_rsa.pub | ssh user@hostname <span style="color:#e6db74">&#39;cat &gt;&gt; .ssh/authorized_keys&#39;</span>
-</code></pre></div><p>Pasting a secret into GitHub is pretty easy. In your repository, navigate here:</p>
+</code></pre></div><h2 id="secrets">SECRETS</h2>
+<p>Secrets are encrypted values that can be read securely by your Actions scripts. You can read more about GitHub secrets here: <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">https://docs.github.com/en/actions/reference/encrypted-secrets</a></p>
+<p>Adding a new secret into GitHub is pretty easy. In your repository, navigate here:</p>
 <pre><code>Settings -&gt; Secrets -&gt; New repository secret
-</code></pre><p>Name the secret <code>KEY</code> and paste in the private key contents. You can read more about GitHub secrets here: <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">https://docs.github.com/en/actions/reference/encrypted-secrets</a></p>
+</code></pre><p>Let&rsquo;s use this to give GitHub our SSH private key.</p>
+<p>Create a new secret and name it <code>KEY</code>. Paste in the private key contents as its value.</p>
 <p>If you added a passphrase to your key, add it to a <code>PASSPHRASE</code> secret.</p>
-<h2 id="other-secrets">Other secrets</h2>
 <p>Add these other secrets to GitHub. You have to specify the <code>USERNAME</code>, <code>HOST</code> AND <code>PORT</code> separately.</p>
 <ul>
 <li><code>USERNAME</code> the user you want to log into for the scp</li>
 <li><code>HOST</code> probably an IP address</li>
-<li><code>PORT</code> the port number, probably 22 if kept the default</li>
+<li><code>PORT</code> the port number, probably 22 if you kept the default</li>
 </ul>
 <h2 id="github-action">GitHub action</h2>
+<h3 id="automated-hugo-dump">Automated Hugo dump</h3>
 <p>Here is my full <code>.yml</code> file. The last step <code>Upload</code> is when the files are copied.</p>
 <p>You can read more about <code>scp-action</code> here: <a href="https://github.com/appleboy/scp-action">https://github.com/appleboy/scp-action</a></p>
 <p>I stuck to the basic Hugo action. I tried with the latest version of Hugo, but that didn&rsquo;t work. You can tweak your actions by reading the README: <a href="https://github.com/peaceiris/actions-hugo">https://github.com/peaceiris/actions-hugo</a></p>
@@ -65,9 +111,8 @@ jobs:
           source: &quot;./public&quot;
           target: &quot;gh_page&quot;
           rm: true
-</code></pre><p>I also want to deploy to GitHub pages, so I add these steps at the end.</p>
-<p>The <code>sed</code> command edits my Hugo <code>config.toml</code> to point to the GH pages address. I can then deploy, and the site will work properly. If you don&rsquo;t do this, the site will be broken.</p>
-<p>Pro tip: you can run multiple commands by using <code>run: |</code>. You can see this below.</p>
+</code></pre><h3 id="dont-forget-your-pages">Don&rsquo;t forget your pages</h3>
+<p>I also want to deploy to GitHub pages, so I add these steps at the end.</p>
 <pre><code>      - name: Config
         run: |
           sed -i &quot;s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=&quot; config.toml
@@ -78,7 +123,9 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-</code></pre><h2 id="final-step-cron-job">Final step: cron job</h2>
+</code></pre><p>The <code>sed</code> command edits my Hugo <code>config.toml</code> to point to the GH pages address. I can then deploy, and the site will work properly. If you don&rsquo;t do this, the site will be broken.</p>
+<p>Pro tip: you can run multiple commands by using <code>run: |</code>. You can see this below.</p>
+<h2 id="final-step-cron-job">Final step: cron job</h2>
 <p>On your server, run <code>sudo crontab -e</code> to start a regular job as <code>ROOT</code>. This will regularly copy your files to the web server.</p>
 <p>A file will open in your console, where you can paste</p>
 <pre><code>0 * * * * rsync -avh /home/username/gh_page/public/ /var/www/example.com/
