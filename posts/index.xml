@@ -1,4 +1,78 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 09 May 2021 21:09:20 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>VSI Sound</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_books/</link><pubDate>Sun, 09 May 2021 21:09:20 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_books/</guid><description>My review of A Very Short Introduction to Sound</description><content type="html"><![CDATA[<p>This is another great Very Short Introduction. I almost always love these more &ldquo;basic science&rdquo; books. I find that they give a lot of interesting information. Each chapter tends to talk about another new facet of the book&rsquo;s topic. Very fun!</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 11 May 2021 07:53:24 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Rice bug identification</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_microscope/</link><pubDate>Tue, 11 May 2021 07:53:24 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_microscope/</guid><description>I found some bugs in my pouches of rice, and I think I&amp;rsquo;ve identified them. I threw the rice away afterwards.</description><content type="html"><![CDATA[<h2 id="backstory">Backstory</h2>
+<p>I had bought large pouches of rice at the start of the pandemic, having read that rices keeps very well. Unfortunately I never really eat rice so the pouches languished in storage. Doubly unfortunate, they seem to have had bugs!</p>
+<p>The bugs appear distinct from the other bugs I found in my beans. They&rsquo;re thinner.</p>
+<h2 id="video">Video</h2>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/sJ8H56PSEHc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="setup">Setup</h2>
+<p>I have OBS studio set up to capture from my webcam, my endoscope, and my web browser.</p>
+<p>If you&rsquo;re on Fedora, just enable the RPM Fusion repositories, then</p>
+<pre><code class="language-console" data-lang="console">sudo dnf install obs-studio
+</code></pre><p>Let the wizard auto-configure things. He told me that I could only record at 720P 30FPS. When you record, things will be dumped into an <code>.mkv</code> file in real-time. I was able to use my usual techniques to separate the audio and clean it.</p>
+<h2 id="bug-description">Bug description</h2>
+<p>The main things I know about the bugs are</p>
+<ul>
+<li>They like dry grains and seem to multiply in them (where to they get moisture?)</li>
+<li>They&rsquo;re thin, 2-3mm long</li>
+<li>They&rsquo;ve got a peculiar spiky prothorax</li>
+</ul>
+<figure>
+    <img src="bug_a.png"
+         alt="Screenshot of a rice bug on its back"/> <figcaption>
+            <p>Screenshot of a rice bug on its back</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img src="bug_b.png"
+         alt="Live bug crawling around in rice"/> <figcaption>
+            <p>Live bug crawling around in rice</p>
+        </figcaption>
+</figure>
+
+<figure>
+    <img src="bug_c.png"
+         alt="Screenshot of bug on its belly, eyes and carapace visible"/> <figcaption>
+            <p>Screenshot of bug on its belly, eyes and carapace visible</p>
+        </figcaption>
+</figure>
+
+<h2 id="bug-identification">Bug identification</h2>
+<h3 id="rice-bugs">Rice bugs</h3>
+<p>First, a quick Wikipedia search for &ldquo;rice bug&rdquo; comes up with three possibilities</p>
+<blockquote>
+<p>The term rice bug may apply to a number of species in at least three bug genera that attack rice: especially at the later panicle stages.</p>
+</blockquote>
+<ul>
+<li>Genus Leptocorisa <a href="https://en.wikipedia.org/wiki/Leptocorisa">https://en.wikipedia.org/wiki/Leptocorisa</a></li>
+<li>Species Oebalus Pugnax, the rice stink bug <a href="https://en.wikipedia.org/wiki/Oebalus_pugnax">https://en.wikipedia.org/wiki/Oebalus_pugnax</a></li>
+<li>Genus Stenocoris <a href="https://en.wikipedia.org/wiki/Stenocoris">https://en.wikipedia.org/wiki/Stenocoris</a></li>
+</ul>
+<p>None of these look close to our specimen.</p>
+<h3 id="rice-weevils">Rice weevils</h3>
+<p>The next quick result for rice pests is the rice weevil. Look at any photo of these and you&rsquo;ll see a problem: it has a huge snout! No matter how I looked at my bugs, I could not find a snout!</p>
+<blockquote>
+<p>The adults are usually between 3 and 4.6 mm long, with a long snout.</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Rice_weevil">https://en.wikipedia.org/wiki/Rice_weevil</a></p>
+<p>The confusing thing is that some Google Image photos of rice weevils have it without a snout. I wonder if that&rsquo;s just from website with inaccurate photos.</p>
+<h3 id="rice-beetles">Rice beetles</h3>
+<p>With more accurate photos it&rsquo;s possible to come up with other possibilities, in particular beetles. The saw-toothed grain beetle looks quite similar, but</p>
+<blockquote>
+<p>O. surinamensis is a slender, dark brown beetle 2.4–3 mm in size, with characteristic &ldquo;teeth&rdquo; running down the side of the prothorax.</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Oryzaephilus_surinamensis">https://en.wikipedia.org/wiki/Oryzaephilus_surinamensis</a></p>
+<p>Reading that article, another candidate exists: the merchant grain beetle.</p>
+<blockquote>
+<p>It can be differentiated from O. surinamensis by its larger eyes and by the shape of the head, the area just behind the eyes of O. mercator is narrower than that of O. surinamensis, which has a more triangular shaped head.</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Oryzaephilus_mercator">https://en.wikipedia.org/wiki/Oryzaephilus_mercator</a></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>I had beetles in my rice. I threw it all away.</p>
+]]></content></item><item><title>VSI Sound</title><link>https://sjchiass.github.io/website/posts/misc/2021_w19_books/</link><pubDate>Sun, 09 May 2021 21:09:20 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/misc/2021_w19_books/</guid><description>My review of A Very Short Introduction to Sound</description><content type="html"><![CDATA[<p>This is another great Very Short Introduction. I almost always love these more &ldquo;basic science&rdquo; books. I find that they give a lot of interesting information. Each chapter tends to talk about another new facet of the book&rsquo;s topic. Very fun!</p>
 <p>This book on <strong>sound</strong> is just like that. Each chapter presents a different facet of sound, and each chapter is full of interesting information. I read this VSI very quickly and was very fascinated with sound afterwards.</p>
 <p>(I had just started playing my MIDI keyboard and was curious about musical notes.)</p>
 <h2 id="the-nature-of-sound">The nature of sound</h2>
