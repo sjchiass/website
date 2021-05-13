@@ -4,7 +4,7 @@ languageCode = "en-us"
 theme = ["github.com/Track3/hermit"]
 
 DefaultContentLanguage = "en"
-SectionPagesMenu = "main"
+#SectionPagesMenu = "main"
 Paginate = 10
 rssLimit = 10  # Maximum number of items in the RSS feed.
 googleAnalytics = ""
@@ -47,3 +47,20 @@ enableEmoji = true
   [[params.social]]
     name = "facebook"
     url = "https://www.facebook.com/sjchiass"
+
+[menu]
+
+  [[menu.main]]
+    name = "Posts"
+    url = "posts/"
+    weight = 10
+
+  [[menu.main]]
+    name = "Tags"
+    url = "tags/"
+    weight = 20
+
+  [[menu.main]]
+    name = "Subscribe"
+    url = "subscribe/"
+    weight = 30
