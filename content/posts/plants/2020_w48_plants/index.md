@@ -4,6 +4,7 @@ date: 2020-11-22T16:31:00
 tags:
 - plants
 - microscope
+- bugs
 author: Sebastien Chiasson
 summary: What I thought were fruit flies turn out not be.
 ---
