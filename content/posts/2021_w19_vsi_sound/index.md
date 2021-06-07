@@ -1,5 +1,5 @@
 ---
-title: VSI Sound
+title: A review of VSI Sound
 date: 2021-05-09T21:09:20-04:00
 tags:
  - books
