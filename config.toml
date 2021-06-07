@@ -15,6 +15,9 @@ enableEmoji = true
 [taxonomies]
   tag = "tags"
 
+[permalinks]
+  posts = "/:filename/"
+
 [author]
   name = "Sebastien Chiasson"
 
