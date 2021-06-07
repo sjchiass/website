@@ -16,7 +16,7 @@ enableEmoji = true
   tag = "tags"
 
 [permalinks]
-  posts = "/:filename/"
+  posts = "/:section/:filename/"
 
 [author]
   name = "Sebastien Chiasson"
