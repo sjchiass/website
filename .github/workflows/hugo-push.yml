@@ -21,21 +21,6 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify
-
-      - name: Upload
-        uses: appleboy/scp-action@master
-        with:
-          username: ${{ secrets.USERNAME }}
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          key: ${{ secrets.KEY }}
-          source: "./public"
-          target: "gh_page"
-          rm: true
-
-      - name: Rebuild
         run: |
           sed -i "s=${{ secrets.DO_DOMAIN }}=${{ secrets.GH_DOMAIN }}=" config.toml
           hugo --minify
