@@ -22,9 +22,9 @@ The first story is Guilhem de Rodes the Cathar heretic versus the Inquisitor fro
 
 The second story is about a man called Burdett from England. The author only has a few sources about him, but he shows what can and cannot be concluded from these. Notably there are things the sources suggest, but these suggestions are for the historian to weigh. Burdett is mentioned in one record to have left his wife in England, in the next he is accused of being a salacious pastor in America, and in the final source he's recorded as having fought on the king's side in the English civil war. Burdett flees England to America for more religious freedom but returns to England to fight for the king. The author was able to find these things in archives, sometimes thanks to tips from friends.
 
-Finally, the last story is about Sojourner Truth, but it is relatively shorter than the first two. Truth gave a speech on womens' rights at a church, and her speech was written down by two people differently. Which is the right one? One is written in "proper" English while the other is more a phonetic recreation of how Black Americans spoke at the time. It's not easy to choose either one as the "right" one. One is more recent, one might seem more "what it was like", and so on. The author does this to show that there is not "one true" history, even when we feel that we have all material in our hands.
+Finally, the last story is about Sojourner Truth, but it is relatively shorter than the first two. Truth gave a speech on womens' rights at a church, and her speech was written down by two people differently. Which is the right one? One is written in "proper" English, and the other one is more a phonetic recreation of how Black Americans spoke at the time. It's not easy to choose either one as the "right" one. One is more recent, one might seem more "what it was like", and so on. The author does this to show that there is not "one true" history, even when we feel that we have all material in our hands.
 
-(If someone were writing a history about you, would you want them to use the shorthand/slang in your e-mails, or would you want historians to rewrite your messages in something readers are familiar with?)
+(If someone were writing a history about you, would you want them to use the shorthand/slang/memes in your e-mails, or would you want historians to rewrite your messages in something readers are familiar with?)
 
 ## Mentalité
 
@@ -46,7 +46,7 @@ The author uses a historian Ranke as the "father" of fact-based history. Ranke d
 
 The next interesting point was with historians using scientific (or rather technical) methods to find out the truth of the past. The author brings up the example of the historian Lorenzo Valla proving with philology that the "Donation of Constantine" was a forgery. The Donation was a historical document that the Church used to justify its authority. The philology was also an example of history of language, a kind of history unlike Thucidydes' "pure" political history.
 
-Finally, history has been broadened by Marx. The author says that he was responsible for the widespread idea today that people in the past were shaped by their social and economic environment. For example, when talking about the American Civil War, historians will also talk about the society in which it started and the economic situations of the different groups. Personally, I've found this broader historical analysis lacking in the ancient histories: these older historians didn't seem that interested in the why.
+Finally, history has been broadened by Marx. The author says that he was responsible for the widespread idea today that people in the past were shaped by their social and economic environment. For example, when talking about the American Civil War, historians will also talk about the society in which it started and the economic situations of the different groups. Personally, I've found this broader historical analysis lacking in the ancient histories: these older historians didn't seem that interested in really understanding people.
 
 ## Conclusion
 
