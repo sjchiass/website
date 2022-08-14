@@ -1,4 +1,183 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 30 Jan 2022 16:00:00 +0000</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Cheesaventure</title><link>https://sjchiass.github.io/website/posts/2022_w05_cheese/</link><pubDate>Sun, 30 Jan 2022 16:00:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/2022_w05_cheese/</guid><description>A few cheeses from the store</description><content type="html"><![CDATA[<h3 id="cheese">Cheese</h3>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Aug 2022 09:00:00 +0000</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Adventures of FartBot</title><link>https://sjchiass.github.io/website/posts/2022_w33_bot/</link><pubDate>Sun, 14 Aug 2022 09:00:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/2022_w33_bot/</guid><description>A robot approaches cats while meowing and farting</description><content type="html"><![CDATA[<h2 id="overview">Overview</h2>
+<p>This is Trilobot kit powered by a Raspberry Pi 4 and USB battery pack. There&rsquo;s a cheap speaker on the back to play the sounds. The controls are through Python.</p>
+<h2 id="video">Video</h2>
+<p>😾 💩 😾</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/siE60RSGWLs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="parts-list">Parts list</h2>
+<p>Here&rsquo;s what I needed to make this, with some comments. ✅</p>
+<ul>
+<li><a href="https://www.pishop.ca/product/raspberry-pi-4-model-b-8gb/">Raspberry Pi 4 8GB</a>
+<ul>
+<li>The CPU and memory usage is very low, so a less powerful Raspberry Pi is better.</li>
+</ul>
+</li>
+<li><a href="https://www.pishop.ca/product/trilobot/">Trilobot</a>
+<ul>
+<li>Official <a href="https://learn.pimoroni.com/article/assembling-trilobot">setup guide</a></li>
+<li>The kit provides the chassis, wheels, and distance sensors (which I don&rsquo;t use for now)</li>
+<li>The Raspberry Pi is sandwiched inside the chassis</li>
+<li>The camera is sandwiched in plates at the front of the body</li>
+</ul>
+</li>
+<li><a href="https://www.pishop.ca/product/raspberry-pi-compatible-5mp-camera/">A cheap non-official Raspberry Pi camera</a>
+<ul>
+<li>I got mine cheap on Amazon. If it&rsquo;s non-standard, the camera might have components that make it hard to mount properly.</li>
+</ul>
+</li>
+<li><a href="https://www.pishop.ca/product/power-bank-10000-mah-usb-c-fast-charge/">A 3A 5V battery pack</a>
+<ul>
+<li>In my opinion, the 3A is necessary. The Pi would sometimes reboot with less powerful batteries.</li>
+<li>The <a href="https://shop.pimoroni.com/products/nanowave-3-5000mah-usb-c-a-power-bank">official Trilobot battery</a> is 3A.</li>
+</ul>
+</li>
+<li><a href="https://www.amazon.ca/Rokono-Speaker-iPhone-Player-Laptop/dp/B007NJ3SIM">A speaker with its own battery</a>
+<ul>
+<li>Mine is older and was probably cheaper than this. Not sure where we got it, but it was probably from a discount store.</li>
+<li>This kind of speaker is charged by USB and connects by a standard audio jack, which the Raspberry Pi has.</li>
+<li>They are pretty loud!</li>
+</ul>
+</li>
+</ul>
+<p>Optional stuff ❓</p>
+<ul>
+<li><a href="https://www.pishop.ca/product/argon-fan-hat-for-raspberry-pi-3b-3b-4b/">Argon Fan HAT</a>
+<ul>
+<li>The Raspberry Pi 4 gets hot, so having a fan might help.</li>
+</ul>
+</li>
+<li><a href="https://www.pishop.ca/raspberry-pi-header-dimensions/">Headers</a>
+<ul>
+<li>If you&rsquo;re going to add HATs to the Pi, you&rsquo;ll need to play with different header sizes to make things connect properly.</li>
+</ul>
+</li>
+<li><a href="https://www.pishop.ca/product/brass-screw-and-stand-off-set-m2-5-180-pieces/">Spacers</a>
+<ul>
+<li>Again, if you&rsquo;re adding stuff, you need a variety of sizes to make fit properly. A bit of trial and error.</li>
+</ul>
+</li>
+</ul>
+<h2 id="software">Software</h2>
+<h3 id="streaming">Streaming</h3>
+<p>Controlling a robot like this is difficult with lag. It was a challenge to find a streaming method that worked best.</p>
+<p>Luckily the <code>libcamera</code> documentation has <a href="https://www.raspberrypi.com/documentation/accessories/camera.html#libcamera-vid">a lot of examples</a> on how to do low-latency streaming. For the least latency use the <code>ffplay</code> commands, not the <code>cvlc</code> commands.</p>
+<p>In my case, I set the camera framerate to 12. I find that this seems to reduce lag further. I&rsquo;m guessing this is because the client &ldquo;falls behind&rdquo; at higher framerates.</p>
+<p>My command for the server/robot:</p>
+<pre><code class="language-console" data-lang="console">libcamera-vid -t 0 -n --width 800 --height 600 --codec h264 --profile baseline --framerate 12 --inline --listen -o tcp://0.0.0.0:8888
+</code></pre><p>My command for the client/controller:</p>
+<pre><code class="language-console" data-lang="console">ffplay tcp://192.168.0.123:8888 -fflags nobuffer -flags low_delay -framedrop
+</code></pre><h3 id="playing-sound">Playing sound</h3>
+<p>I got free sound files from <a href="https://commons.wikimedia.org/wiki/Category:Flatulence">Wikimedia Commons</a>. On Linux you can play <code>.wav</code> with <code>aplay</code>. For <code>.ogg</code> files you need to install <code>vorbis-tools</code> and then play them with the <code>ogg123</code> command. Both of these commands can be used non-blocking in Python with <code>subprocess.Popen()</code>.</p>
+<h3 id="remote-control">Remote control</h3>
+<p>I&rsquo;m still working on this code. I feel like there must be a better way.</p>
+<p>When you connect to the Pi through SSH, you only have a terminal to send commands over. What this code does is listen for key presses and run code conditionally. If a key is held down, it stays in its current state. If a key stops being pressed, the code returns to rest after a delay.</p>
+<p>So if you hold down <code>w</code> the robot will keep moving forward. Since you&rsquo;re holding down <code>w</code>, you&rsquo;re actually sending repetitive <code>wwwwwwwwwwww</code> every 100ms or so through the console. When you stop pressing <code>w</code>, the robot will keep moving forward for 500ms and then stop.</p>
+<p>If you tap <code>a</code> the robot will rotate to the left for 500ms, then stop.</p>
+<p>This makes it like playing a video game on your keyboard. However, it&rsquo;s a lot less responsive and you can&rsquo;t press key combinations.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> select
+<span style="color:#f92672">import</span> tty
+<span style="color:#f92672">import</span> termios
+<span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> sample
+<span style="color:#f92672">from</span> subprocess <span style="color:#f92672">import</span> Popen
+<span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> sleep
+<span style="color:#f92672">from</span> trilobot <span style="color:#f92672">import</span> Trilobot
+
+tbot <span style="color:#f92672">=</span> Trilobot()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isData</span>():
+    <span style="color:#66d9ef">return</span> select<span style="color:#f92672">.</span>select([sys<span style="color:#f92672">.</span>stdin], [], [], <span style="color:#ae81ff">0</span>) <span style="color:#f92672">==</span> ([sys<span style="color:#f92672">.</span>stdin], [], [])
+
+old_settings <span style="color:#f92672">=</span> termios<span style="color:#f92672">.</span>tcgetattr(sys<span style="color:#f92672">.</span>stdin)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tbot_dispatch</span>(i, speed):
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;w&#34;</span>, <span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;s&#34;</span>, <span style="color:#e6db74">&#34;d&#34;</span>, <span style="color:#e6db74">&#34;q&#34;</span>, <span style="color:#e6db74">&#34;e&#34;</span>]:
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;w&#34;</span>:
+            tbot<span style="color:#f92672">.</span>forward(speed)
+        <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;a&#34;</span>:
+            tbot<span style="color:#f92672">.</span>turn_left(<span style="color:#ae81ff">0.8</span><span style="color:#f92672">*</span>speed)
+        <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;s&#34;</span>:
+            tbot<span style="color:#f92672">.</span>backward(speed)
+        <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;d&#34;</span>:
+            tbot<span style="color:#f92672">.</span>turn_right(<span style="color:#ae81ff">0.8</span><span style="color:#f92672">*</span>speed)
+        <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;q&#34;</span>:
+            tbot<span style="color:#f92672">.</span>set_motor_speeds(<span style="color:#ae81ff">0.8</span><span style="color:#f92672">*</span>speed, speed)
+        <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;e&#34;</span>:
+            tbot<span style="color:#f92672">.</span>set_motor_speeds(speed, <span style="color:#ae81ff">0.8</span><span style="color:#f92672">*</span>speed)
+    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;m&#34;</span>:
+        to_play <span style="color:#f92672">=</span> sample([
+        [<span style="color:#e6db74">&#34;ogg123&#34;</span>, <span style="color:#e6db74">&#34;meow1.ogg&#34;</span>],
+        [<span style="color:#e6db74">&#34;ogg123&#34;</span>, <span style="color:#e6db74">&#34;meow2.ogg&#34;</span>],
+        [<span style="color:#e6db74">&#34;aplay&#34;</span>, <span style="color:#e6db74">&#34;meow3.wav&#34;</span>],
+        [<span style="color:#e6db74">&#34;ogg123&#34;</span>, <span style="color:#e6db74">&#34;meow4.ogg&#34;</span>]
+        ], <span style="color:#ae81ff">1</span>)
+        Popen(to_play[<span style="color:#ae81ff">0</span>])
+    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;f&#34;</span>:
+        to_play <span style="color:#f92672">=</span> sample([
+        [<span style="color:#e6db74">&#34;ogg123&#34;</span>, <span style="color:#e6db74">&#34;fart1.ogg&#34;</span>],
+        [<span style="color:#e6db74">&#34;aplay&#34;</span>, <span style="color:#e6db74">&#34;fart2.wav&#34;</span>],
+        [<span style="color:#e6db74">&#34;ogg123&#34;</span>, <span style="color:#e6db74">&#34;fart3.ogg&#34;</span>]
+        ], <span style="color:#ae81ff">1</span>)
+        Popen(to_play[<span style="color:#ae81ff">0</span>])
+    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;l&#34;</span>:
+        tbot<span style="color:#f92672">.</span>fill_underlighting(<span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>)
+    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;k&#34;</span>:
+        tbot<span style="color:#f92672">.</span>fill_underlighting(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+    <span style="color:#66d9ef">elif</span> i <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#e6db74">&#34;2&#34;</span>, <span style="color:#e6db74">&#34;3&#34;</span>, <span style="color:#e6db74">&#34;4&#34;</span>, <span style="color:#e6db74">&#34;5&#34;</span>, <span style="color:#e6db74">&#34;6&#34;</span>, <span style="color:#e6db74">&#34;7&#34;</span>, <span style="color:#e6db74">&#34;8&#34;</span>, <span style="color:#e6db74">&#34;9&#34;</span>, <span style="color:#e6db74">&#34;0&#34;</span>]:
+        i <span style="color:#f92672">=</span> float(i)
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0.0</span>:
+            speed <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+        <span style="color:#66d9ef">else</span>:
+            speed <span style="color:#f92672">=</span> i<span style="color:#f92672">/</span><span style="color:#ae81ff">10.0</span>
+    <span style="color:#66d9ef">else</span>:
+        tbot<span style="color:#f92672">.</span>coast()
+    <span style="color:#75715e"># Return the speed value</span>
+    <span style="color:#66d9ef">return</span> speed
+
+speed <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+downtime <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+increment <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.05</span>
+threshold <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.05</span>
+at_rest <span style="color:#f92672">=</span> False
+new, old <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#66d9ef">try</span>:
+    tty<span style="color:#f92672">.</span>setcbreak(sys<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>fileno())
+
+    <span style="color:#66d9ef">while</span> True:
+        <span style="color:#66d9ef">if</span> isData():
+            new <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>read(<span style="color:#ae81ff">1</span>)
+            at_rest <span style="color:#f92672">=</span> False
+            downtime <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+            <span style="color:#66d9ef">if</span> new <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x1b</span><span style="color:#e6db74">&#39;</span>:         <span style="color:#75715e"># x1b is ESC</span>
+                <span style="color:#66d9ef">break</span>
+            <span style="color:#66d9ef">elif</span> new <span style="color:#f92672">!=</span> old:
+                speed <span style="color:#f92672">=</span> tbot_dispatch(new, speed)
+            old <span style="color:#f92672">=</span> new
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">if</span> at_rest:
+                <span style="color:#66d9ef">pass</span>
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">if</span> downtime <span style="color:#f92672">&gt;</span> threshold:
+                    at_rest <span style="color:#f92672">=</span> True
+                    new, old <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>
+                    tbot<span style="color:#f92672">.</span>coast()
+                    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;AT REST&#34;</span>)
+                <span style="color:#66d9ef">else</span>:
+                    downtime <span style="color:#f92672">+=</span> increment
+                    sleep(increment)
+
+<span style="color:#66d9ef">finally</span>:
+    termios<span style="color:#f92672">.</span>tcsetattr(sys<span style="color:#f92672">.</span>stdin, termios<span style="color:#f92672">.</span>TCSADRAIN, old_settings)
+</code></pre></div><h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Better lights to see in the dark 🔦</li>
+<li>A microphone to stream audio 🎤</li>
+<li>Some kind of treat dispenser to make my cats a new friend 😺</li>
+</ul>
+]]></content></item><item><title>Cheesaventure</title><link>https://sjchiass.github.io/website/posts/2022_w05_cheese/</link><pubDate>Sun, 30 Jan 2022 16:00:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/2022_w05_cheese/</guid><description>A few cheeses from the store</description><content type="html"><![CDATA[<h3 id="cheese">Cheese</h3>
 <h4 id="wesleyberry-fruit-cheese">Wesleyberry fruit cheese</h4>
 <figure>
     <img src="IMG_2493.JPG"
