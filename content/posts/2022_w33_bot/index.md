@@ -1,6 +1,7 @@
 ---
 title: Adventures of FartBot
-date: 2022-08-14T09:00:00
+date: 2022-08-14T09:00:00-04:00
+lastmod: 2022-08-15T19:00:00-04:00
 tags:
 - cats
 - electronics
@@ -10,7 +11,9 @@ summary: A robot approaches cats while meowing and farting
 
 ## Overview
 
-This is Trilobot kit powered by a Raspberry Pi 4 and USB battery pack. There's a cheap speaker on the back to play the sounds. The controls are through Python.
+This is Trilobot kit powered by a Raspberry Pi 4 and USB battery pack. There's a cheap speaker on the back to play the sounds. The controls are through a Python script.
+
+I control the robot with a keyboard over SSH. It streams its camera over the LAN so that I can see what it's doing. In the video below I see what the robot sees, in the lower-right corner of the screen.
 
 ## Video
 
@@ -18,19 +21,19 @@ This is Trilobot kit powered by a Raspberry Pi 4 and USB battery pack. There's a
 
 {{< youtube siE60RSGWLs >}}
 
-## Parts list
+## Hardware
 
 Here's what I needed to make this, with some comments. :white_check_mark:
 
   * [Raspberry Pi 4 8GB](https://www.pishop.ca/product/raspberry-pi-4-model-b-8gb/)
-    * The CPU and memory usage is very low, so a less powerful Raspberry Pi is better.
+    * The CPU and memory usage is very low, so a less powerful Raspberry Pi would be more efficient.
   * [Trilobot](https://www.pishop.ca/product/trilobot/)
     * Official [setup guide](https://learn.pimoroni.com/article/assembling-trilobot)
     * The kit provides the chassis, wheels, and distance sensors (which I don't use for now)
-    * The Raspberry Pi is sandwiched inside the chassis
+    * The Raspberry Pi is sandwiched between the chassis boards
     * The camera is sandwiched in plates at the front of the body
   * [A cheap non-official Raspberry Pi camera](https://www.pishop.ca/product/raspberry-pi-compatible-5mp-camera/)
-    * I got mine cheap on Amazon. If it's non-standard, the camera might have components that make it hard to mount properly.
+    * I got mine cheap on Amazon. If it's non-standard, the camera might have components on the PCB that make it hard to mount properly.
   * [A 3A 5V battery pack](https://www.pishop.ca/product/power-bank-10000-mah-usb-c-fast-charge/)
     * In my opinion, the 3A is necessary. The Pi would sometimes reboot with less powerful batteries.
     * The [official Trilobot battery](https://shop.pimoroni.com/products/nanowave-3-5000mah-usb-c-a-power-bank) is 3A.
@@ -52,9 +55,9 @@ Optional stuff :question:
 
 ### Streaming
 
-Controlling a robot like this is difficult with lag. It was a challenge to find a streaming method that worked best.
+Controlling a robot like this is difficult with lag. It was a challenge to find a something that worked.
 
-Luckily the `libcamera` documentation has [a lot of examples](https://www.raspberrypi.com/documentation/accessories/camera.html#libcamera-vid) on how to do low-latency streaming. For the least latency use the `ffplay` commands, not the `cvlc` commands.
+Luckily the `libcamera` documentation has [a lot of examples](https://www.raspberrypi.com/documentation/accessories/camera.html#libcamera-vid) on how to do low-latency streaming. For the least latency, use the `ffplay` commands not the `cvlc` commands.
 
 In my case, I set the camera framerate to 12. I find that this seems to reduce lag further. I'm guessing this is because the client "falls behind" at higher framerates.
 
@@ -74,17 +77,26 @@ ffplay tcp://192.168.0.123:8888 -fflags nobuffer -flags low_delay -framedrop
 
 I got free sound files from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Flatulence). On Linux you can play `.wav` with `aplay`. For `.ogg` files you need to install `vorbis-tools` and then play them with the `ogg123` command. Both of these commands can be used non-blocking in Python with `subprocess.Popen()`.
 
-### Remote control
+### Long-range VPN access
+
+I use wireguard in a `rpi <-> server <-> remote-controller` setup. The "server" peer has a static IP address, so as long as the robot uses the [`PersistentKeepalive = 25` configuration](https://wiki.archlinux.org/title/WireGuard#Unable_to_establish_a_persistent_connection_behind_NAT_/_firewall), it can be connected to from anywhere. I've controlled the robot from far away with a laptop and a cellphone hotspot, with very little lag.
+
+Some guides if you're interested in wireguard.
+
+  - https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-ubuntu-22-04
+  - https://wiki.archlinux.org/title/WireGuard
+
+### Remote control Python script
 
 I'm still working on this code. I feel like there must be a better way.
 
-When you connect to the Pi through SSH, you only have a terminal to send commands over. What this code does is listen for key presses and run code conditionally. If a key is held down, it stays in its current state. If a key stops being pressed, the code returns to rest after a delay.
+When you connect to the Pi through SSH, you only have a terminal to send commands over. What this code does is listen for key presses and run code conditionally. If a key is held down, keeps performing an action. If a key stops being pressed, the code returns to rest after a short delay.
 
 So if you hold down `w` the robot will keep moving forward. Since you're holding down `w`, you're actually sending repetitive `wwwwwwwwwwww` every 100ms or so through the console. When you stop pressing `w`, the robot will keep moving forward for 500ms and then stop.
 
 If you tap `a` the robot will rotate to the left for 500ms, then stop.
 
-This makes it like playing a video game on your keyboard. However, it's a lot less responsive and you can't press key combinations.
+This makes it like playing a first-person video game on your keyboard. But it's a lot less responsive and you can't press key combinations.
 
 ```python
 import sys
