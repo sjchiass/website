@@ -1,5 +1,6 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Aug 2022 09:00:00 +0000</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Adventures of FartBot</title><link>https://sjchiass.github.io/website/posts/2022_w33_bot/</link><pubDate>Sun, 14 Aug 2022 09:00:00 +0000</pubDate><guid>https://sjchiass.github.io/website/posts/2022_w33_bot/</guid><description>A robot approaches cats while meowing and farting</description><content type="html"><![CDATA[<h2 id="overview">Overview</h2>
-<p>This is Trilobot kit powered by a Raspberry Pi 4 and USB battery pack. There&rsquo;s a cheap speaker on the back to play the sounds. The controls are through Python.</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Errata</title><link>https://sjchiass.github.io/website/posts/</link><description>Recent content in Posts on Errata</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Aug 2022 09:00:00 -0400</lastBuildDate><atom:link href="https://sjchiass.github.io/website/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Adventures of FartBot</title><link>https://sjchiass.github.io/website/posts/2022_w33_bot/</link><pubDate>Sun, 14 Aug 2022 09:00:00 -0400</pubDate><guid>https://sjchiass.github.io/website/posts/2022_w33_bot/</guid><description>A robot approaches cats while meowing and farting</description><content type="html"><![CDATA[<h2 id="overview">Overview</h2>
+<p>This is Trilobot kit powered by a Raspberry Pi 4 and USB battery pack. There&rsquo;s a cheap speaker on the back to play the sounds. The controls are through a Python script.</p>
+<p>I control the robot with a keyboard over SSH. It streams its camera over the LAN so that I can see what it&rsquo;s doing. In the video below I see what the robot sees, in the lower-right corner of the screen.</p>
 <h2 id="video">Video</h2>
 <p>😾 💩 😾</p>
 
@@ -7,25 +8,25 @@
   <iframe src="https://www.youtube.com/embed/siE60RSGWLs" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<h2 id="parts-list">Parts list</h2>
+<h2 id="hardware">Hardware</h2>
 <p>Here&rsquo;s what I needed to make this, with some comments. ✅</p>
 <ul>
 <li><a href="https://www.pishop.ca/product/raspberry-pi-4-model-b-8gb/">Raspberry Pi 4 8GB</a>
 <ul>
-<li>The CPU and memory usage is very low, so a less powerful Raspberry Pi is better.</li>
+<li>The CPU and memory usage is very low, so a less powerful Raspberry Pi would be more efficient.</li>
 </ul>
 </li>
 <li><a href="https://www.pishop.ca/product/trilobot/">Trilobot</a>
 <ul>
 <li>Official <a href="https://learn.pimoroni.com/article/assembling-trilobot">setup guide</a></li>
 <li>The kit provides the chassis, wheels, and distance sensors (which I don&rsquo;t use for now)</li>
-<li>The Raspberry Pi is sandwiched inside the chassis</li>
+<li>The Raspberry Pi is sandwiched between the chassis boards</li>
 <li>The camera is sandwiched in plates at the front of the body</li>
 </ul>
 </li>
 <li><a href="https://www.pishop.ca/product/raspberry-pi-compatible-5mp-camera/">A cheap non-official Raspberry Pi camera</a>
 <ul>
-<li>I got mine cheap on Amazon. If it&rsquo;s non-standard, the camera might have components that make it hard to mount properly.</li>
+<li>I got mine cheap on Amazon. If it&rsquo;s non-standard, the camera might have components on the PCB that make it hard to mount properly.</li>
 </ul>
 </li>
 <li><a href="https://www.pishop.ca/product/power-bank-10000-mah-usb-c-fast-charge/">A 3A 5V battery pack</a>
@@ -62,8 +63,8 @@
 </ul>
 <h2 id="software">Software</h2>
 <h3 id="streaming">Streaming</h3>
-<p>Controlling a robot like this is difficult with lag. It was a challenge to find a streaming method that worked best.</p>
-<p>Luckily the <code>libcamera</code> documentation has <a href="https://www.raspberrypi.com/documentation/accessories/camera.html#libcamera-vid">a lot of examples</a> on how to do low-latency streaming. For the least latency use the <code>ffplay</code> commands, not the <code>cvlc</code> commands.</p>
+<p>Controlling a robot like this is difficult with lag. It was a challenge to find a something that worked.</p>
+<p>Luckily the <code>libcamera</code> documentation has <a href="https://www.raspberrypi.com/documentation/accessories/camera.html#libcamera-vid">a lot of examples</a> on how to do low-latency streaming. For the least latency, use the <code>ffplay</code> commands not the <code>cvlc</code> commands.</p>
 <p>In my case, I set the camera framerate to 12. I find that this seems to reduce lag further. I&rsquo;m guessing this is because the client &ldquo;falls behind&rdquo; at higher framerates.</p>
 <p>My command for the server/robot:</p>
 <pre><code class="language-console" data-lang="console">libcamera-vid -t 0 -n --width 800 --height 600 --codec h264 --profile baseline --framerate 12 --inline --listen -o tcp://0.0.0.0:8888
@@ -71,12 +72,19 @@
 <pre><code class="language-console" data-lang="console">ffplay tcp://192.168.0.123:8888 -fflags nobuffer -flags low_delay -framedrop
 </code></pre><h3 id="playing-sound">Playing sound</h3>
 <p>I got free sound files from <a href="https://commons.wikimedia.org/wiki/Category:Flatulence">Wikimedia Commons</a>. On Linux you can play <code>.wav</code> with <code>aplay</code>. For <code>.ogg</code> files you need to install <code>vorbis-tools</code> and then play them with the <code>ogg123</code> command. Both of these commands can be used non-blocking in Python with <code>subprocess.Popen()</code>.</p>
-<h3 id="remote-control">Remote control</h3>
+<h3 id="long-range-vpn-access">Long-range VPN access</h3>
+<p>I use wireguard in a <code>rpi &lt;-&gt; server &lt;-&gt; remote-controller</code> setup. The &ldquo;server&rdquo; peer has a static IP address, so as long as the robot uses the <a href="https://wiki.archlinux.org/title/WireGuard#Unable_to_establish_a_persistent_connection_behind_NAT_/_firewall"><code>PersistentKeepalive = 25</code> configuration</a>, it can be connected to from anywhere. I&rsquo;ve controlled the robot from far away with a laptop and a cellphone hotspot, with very little lag.</p>
+<p>Some guides if you&rsquo;re interested in wireguard.</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-ubuntu-22-04">https://www.digitalocean.com/community/tutorials/how-to-set-up-wireguard-on-ubuntu-22-04</a></li>
+<li><a href="https://wiki.archlinux.org/title/WireGuard">https://wiki.archlinux.org/title/WireGuard</a></li>
+</ul>
+<h3 id="remote-control-python-script">Remote control Python script</h3>
 <p>I&rsquo;m still working on this code. I feel like there must be a better way.</p>
-<p>When you connect to the Pi through SSH, you only have a terminal to send commands over. What this code does is listen for key presses and run code conditionally. If a key is held down, it stays in its current state. If a key stops being pressed, the code returns to rest after a delay.</p>
+<p>When you connect to the Pi through SSH, you only have a terminal to send commands over. What this code does is listen for key presses and run code conditionally. If a key is held down, keeps performing an action. If a key stops being pressed, the code returns to rest after a short delay.</p>
 <p>So if you hold down <code>w</code> the robot will keep moving forward. Since you&rsquo;re holding down <code>w</code>, you&rsquo;re actually sending repetitive <code>wwwwwwwwwwww</code> every 100ms or so through the console. When you stop pressing <code>w</code>, the robot will keep moving forward for 500ms and then stop.</p>
 <p>If you tap <code>a</code> the robot will rotate to the left for 500ms, then stop.</p>
-<p>This makes it like playing a video game on your keyboard. However, it&rsquo;s a lot less responsive and you can&rsquo;t press key combinations.</p>
+<p>This makes it like playing a first-person video game on your keyboard. But it&rsquo;s a lot less responsive and you can&rsquo;t press key combinations.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">import</span> select
 <span style="color:#f92672">import</span> tty
