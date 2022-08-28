@@ -51,6 +51,10 @@ enableEmoji = true
     name = "facebook"
     url = "https://www.facebook.com/sjchiass"
 
+  [[params.social]]
+    name = "instagram"
+    url = "https://www.instagram.com/sjchiass/"
+
 [menu]
 
   [[menu.main]]
