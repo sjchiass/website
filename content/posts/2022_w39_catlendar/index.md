@@ -1,5 +1,5 @@
 ---
-title: 2022 cat calendar
+title: 2022 Catlendar
 date: 2022-09-28T20:00:00-04:00
 tags:
 - cats
@@ -8,7 +8,9 @@ author: Sebastien Chiasson
 summary: More than half a year late, the 2022 catlendar in electronic form
 ---
 
-## 2022 Cat Calendar
+## Meow meow meow!
+
+Our cats were hard at work preparing costumes and sceneries for this year! During the night I hear them working hard for the 2023 calendar... I can't wait!
 
 ![January 2022](images/1.png)
 
