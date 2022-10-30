@@ -12,6 +12,10 @@ SITELOGO = SITEURL + "/images/logo.png"
 FAVICON = SITEURL + "/images/logo.png"
 RELATIVE_URLS = False
 
+# Main Menu
+MAIN_MENU = True
+MENUITEMS = (("Archives", "/archives.html"), ("Categories", "/categories.html"), ("Tags", "/tags.html"),)
+
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
