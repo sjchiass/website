@@ -12,6 +12,8 @@ PATH = 'content'
 THEME = "./Flex"
 THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
 
+USE_FOLDER_AS_CATEGORY = True
+
 TIMEZONE = 'Canada/Eastern'
 
 DEFAULT_LANG = 'en'
