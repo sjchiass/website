@@ -18,6 +18,8 @@ TIMEZONE = 'Canada/Eastern'
 
 DEFAULT_LANG = 'en'
 
+GOOGLE_GLOBAL_SITE_TAG = "G-CL4G4R88WX" # Your Google Analytics 4 Property ID
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
