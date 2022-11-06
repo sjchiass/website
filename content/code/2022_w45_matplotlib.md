@@ -3,7 +3,7 @@ title: A vertical graph
 date: 2022-11-06T12:00:00-04:00
 tags: python, data visualization
 author: Sebastien Chiasson
-summary: Some matplotlib code to make an usual lie chart
+summary: Some matplotlib code to make an unusual chart for mobile phones
 ---
 
 ## Overview
