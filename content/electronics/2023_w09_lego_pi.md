@@ -101,6 +101,14 @@ def capture_cam(num):
     cv.imwrite(f"./{num}_{datetime.now().time().strftime('%H%M%S')}.jpg", frame)
 ```
 
+This is what an image looks like. Fairly easy for a human to capture.
+
+![109.3 on an LCD 7-segment display]({attach}143_132814.jpg)
+
+However, do NOT walk away and turn off the lights. You'll have to squint a lot more.
+
+![109.2 on a very dark LCD 7-segment display]({attach}144_132820.jpg)
+
 ## Getting everything together
 
 ### Raw data
