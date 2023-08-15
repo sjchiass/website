@@ -32,7 +32,7 @@ MAIN_MENU = True
 MENUITEMS = (("Archives", "/archives"), ("Categories", "/categories"), ("Tags", "/tags"),)
 
 # Blogroll
-LINKS = (("Live plant feed", "https://plants.sjchiass.com/"),)
+#LINKS = (("Live plant feed", "https://plants.sjchiass.com/"),)
 
 # Social widget
 SOCIAL = (("github", "https://www.github.com/sjchiass"),
